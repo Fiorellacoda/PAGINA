@@ -6,147 +6,92 @@
 <title>ONDA - Inicio</title>
 <style>
 /* Reset */
-* {margin: 0; padding: 0; box-sizing: border-box;}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 /* Tipografía y colores */
-body {
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
-  color: #0d1b2a;
-}
+body { font-family: Arial, sans-serif; line-height: 1.6; color: #0d1b2a; }
 
 /* ====== HEADER ====== */
 header {
-  background-color: #0d1b2a;
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 20px;
-  position: relative;
+  background-color: #0d1b2a; color: white;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 20px; position: relative;
+}
+.logo { font-size: 1.8rem; font-weight: bold; }
+
+/* Toggle (checkbox hack) */
+.nav-toggle { display: none; } /* input hidden */
+.menu-toggle {
+  display: none; font-size: 1.8rem; cursor: pointer; user-select: none;
 }
 
-.logo {
-  font-size: 1.8rem;
-  font-weight: bold;
-}
-
+/* Nav */
 nav {
-  display: flex;
-  align-items: center;
-  gap: 20px;
+  display: flex; align-items: center; gap: 20px;
+}
+nav a, summary.dropbtn {
+  color: white; text-decoration: none; padding: 10px; cursor: pointer;
+}
+nav a:hover, details.dropdown:hover > summary.dropbtn {
+  background-color: #1b263b; border-radius: 5px;
 }
 
-nav a, .dropbtn {
-  color: white;
-  text-decoration: none;
-  padding: 10px;
-  cursor: pointer;
+/* Dropdown con <details> */
+details.dropdown { position: relative; }
+summary.dropbtn {
+  list-style: none; /* quita viñetas */
 }
-
-.dropbtn {             /* reset del botón para que parezca link */
-  background: none;
-  border: 0;
-  font: inherit;
-}
-
-nav a:hover, .dropdown:hover .dropbtn {
-  background-color: #1b263b;
-  border-radius: 5px;
-}
-
-/* Dropdown */
-.dropdown {
-  position: relative;
-}
-
+summary.dropbtn::-webkit-details-marker { display: none; } /* quita triangulito en WebKit */
 .dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: white;
-  min-width: 200px;
-  top: 100%;
-  left: 0;
-  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-  z-index: 999;
+  position: absolute; top: 100%; left: 0; min-width: 200px;
+  background: white; color: #0d1b2a; display: none;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 999;
 }
-
+details[open] > .dropdown-content { display: block; }
 .dropdown-content a {
-  color: #0d1b2a;
-  padding: 10px;
-  display: block;
+  color: #0d1b2a; padding: 10px; display: block; text-decoration: none;
 }
-
-.dropdown-content a:hover {
-  background-color: #e0e0e0;
-}
-
-/* Desktop: abre por hover */
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-/* Mobile: abre por clase .open */
-.dropdown.open .dropdown-content {
-  display: block;
-}
+.dropdown-content a:hover { background-color: #e0e0e0; }
 
 /* ====== HERO ====== */
 .hero {
-  background-color: #0d1b2a;
-  color: white;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
+  background-color: #0d1b2a; color: white;
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
   padding: 60px 20px;
 }
-
 .hero-text { flex: 1; min-width: 280px; }
 .hero-text h1 { font-size: 2.2rem; margin-bottom: 20px; }
 .hero-text p { margin-bottom: 20px; font-size: 1rem; }
-
 .hero-text button {
-  background-color: #c9a646;
-  color: #0d1b2a;
-  padding: 12px 24px;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-  border-radius: 5px;
+  background-color: #c9a646; color: #0d1b2a; padding: 12px 24px;
+  border: none; cursor: pointer; font-weight: bold; border-radius: 5px;
 }
 .hero-text button:hover { background-color: #b38e3c; }
-
 .hero-img { flex: 1; min-width: 280px; text-align: center; }
 .hero-img img { max-width: 100%; border-radius: 10px; }
 
 /* ====== SERVICIOS ====== */
 .section { padding: 60px 20px; text-align: center; }
 .section h2 { font-size: 2rem; margin-bottom: 40px; }
-
-.cards {
-  display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;
-}
+.cards { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
 .card {
   background: white; padding: 25px; border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  flex: 1 1 250px; max-width: 300px;
-  display: flex; flex-direction: column; justify-content: space-between;
+  flex: 1 1 250px; max-width: 300px; display: flex; flex-direction: column;
   transition: transform 0.3s;
 }
 .card:hover { transform: translateY(-5px); }
 .card h3 { font-size: 1.2rem; margin-bottom: 12px; }
 .card p { font-size: 0.95rem; margin-bottom: 15px; }
 .card a {
-  display: inline-block; margin-top: auto; background-color: #0d1b2a;
-  color: white; padding: 10px 16px; text-decoration: none; border-radius: 5px; font-weight: bold;
+  margin-top: auto; background-color: #0d1b2a; color: white;
+  padding: 10px 16px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;
 }
 .card a:hover { background-color: #1b263b; }
 
 /* ====== COTIZACIÓN ====== */
 .cotizacion { background-color: #f4f4f4; padding: 60px 20px; }
 .cotizacion h2 { text-align: center; margin-bottom: 30px; font-size: 2rem; }
-
 .cotizacion form {
   max-width: 450px; margin: auto; display: flex; flex-direction: column; gap: 12px;
 }
@@ -159,32 +104,28 @@ nav a:hover, .dropdown:hover .dropbtn {
 .cotizacion button:hover { background-color: #1b263b; }
 
 /* ====== FOOTER ====== */
-footer {
-  background-color: #0d1b2a;
-  color: white;
-  text-align: center;
-  padding: 20px;
-  margin-top: 20px;
-}
+footer { background-color: #0d1b2a; color: white; text-align: center; padding: 20px; margin-top: 20px; }
 
 /* ====== RESPONSIVE ====== */
-.menu-toggle { display: none; font-size: 1.8rem; cursor: pointer; }
-
 @media (max-width: 768px) {
-  nav {
-    display: none;
-    flex-direction: column;
-    background-color: #0d1b2a;
-    width: 100%;
-    position: absolute;
-    top: 60px; left: 0;
-    z-index: 1000;   /* asegura que quede por delante */
-  }
-  nav.show { display: flex; }
+  /* Mostrar botón hamburguesa */
   .menu-toggle { display: block; }
-  .dropdown-content { position: static; } /* el submenú baja en flujo normal */
-  .hero { flex-direction: column; text-align: center; }
-  .hero-text button { margin-bottom: 20px; }
+
+  /* Ocultar nav por defecto en mobile */
+  nav {
+    display: none; flex-direction: column; background-color: #0d1b2a;
+    width: 100%; position: absolute; top: 60px; left: 0; z-index: 1000;
+  }
+
+  /* Cuando el checkbox está activado, mostrar nav */
+  .nav-toggle:checked ~ nav { display: flex; }
+
+  /* El submenú baja en flujo normal */
+  .dropdown-content { position: static; box-shadow: none; }
+  details[open] > .dropdown-content { display: block; }
+
+  /* Alinear enlaces */
+  nav a, summary.dropbtn { padding: 14px 16px; }
 }
 </style>
 </head>
@@ -192,26 +133,35 @@ footer {
 
 <header>
   <div class="logo">ONDA</div>
-  <nav id="nav-links">
-    <a href="Pag.html">Inicio</a>
-    <div class="dropdown" id="servicios-dropdown">
-      <button class="dropbtn" id="servicios-btn" type="button">Servicios ▾</button>
-      <div class="dropdown-content" id="servicios-menu">
-        <a href="creacion.html">Creación de Páginas Web</a>
-        <a href="automatizaciones.html">Automatizaciones</a>
-        <a href="dashboard.html">Dashboards Interactivos</a>
+
+  <!-- Checkbox que controla el menú (sin JS) -->
+  <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-hidden="true" />
+
+  <!-- Botón hamburguesa -->
+  <label for="nav-toggle" class="menu-toggle" aria-label="Abrir o cerrar menú">&#9776;</label>
+
+  <nav id="nav-links" aria-label="Navegación principal">
+    <a href="index.html">Inicio</a>
+
+    <!-- Dropdown sin JS -->
+    <details class="dropdown">
+      <summary class="dropbtn" aria-haspopup="true" aria-expanded="false">Servicios ▾</summary>
+      <div class="dropdown-content" role="menu">
+        <a href="creacion.html" role="menuitem">Creación de Páginas Web</a>
+        <a href="automatizaciones.html" role="menuitem">Automatizaciones</a>
+        <a href="dashboard.html" role="menuitem">Dashboards Interactivos</a>
       </div>
-    </div>
+    </details>
+
     <a href="contacto.html">Contacto</a>
   </nav>
-  <div class="menu-toggle" id="menu-toggle">&#9776;</div>
 </header>
 
 <section class="hero">
   <div class="hero-text">
     <h1>Impulsá tu negocio con Tecnología y Diseño</h1>
     <p>Desarrollamos páginas web, automatizaciones y dashboards que transforman tus datos en decisiones efectivas y te ayudan a crecer.</p>
-    <button onclick="window.location.href='contacto.html'">Solicitar Presupuesto</button>
+    <button onclick="location.href='contacto.html'">Solicitar Presupuesto</button>
   </div>
   <div class="hero-img">
     <img src="https://via.placeholder.com/400x300" alt="Imagen ilustrativa hero">
@@ -241,64 +191,17 @@ footer {
 
 <section class="cotizacion">
   <h2>Solicitar Cotización</h2>
-  <form id="cotizacionForm">
+  <form>
     <input type="text" name="nombre" placeholder="Tu nombre" required />
     <input type="email" name="email" placeholder="Tu correo" required />
     <textarea name="mensaje" placeholder="Describe tu proyecto" required></textarea>
     <button type="submit">Enviar</button>
   </form>
-  <p id="mensaje-exito" style="display:none; color:green; text-align:center; margin-top:10px;">¡Cotización enviada con éxito!</p>
 </section>
 
 <footer>
   <p>©️ 2025 ONDA - Todos los derechos reservados</p>
 </footer>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  // Menú hamburguesa en celular
-  const nav = document.getElementById('nav-links');
-  const menuToggle = document.getElementById('menu-toggle');
-  if (menuToggle && nav) {
-    menuToggle.addEventListener('click', function () {
-      nav.classList.toggle('show');
-    });
-  }
-
-  // Servicios en mobile (toggle por click)
-  const dropdown = document.getElementById('servicios-dropdown');
-  const serviciosBtn = document.getElementById('servicios-btn');
-  if (dropdown && serviciosBtn) {
-    const toggleServicios = (e) => {
-      if (window.innerWidth <= 768) {
-        e.preventDefault();
-        dropdown.classList.toggle('open'); // .open muestra el submenú en mobile
-      }
-    };
-    serviciosBtn.addEventListener('click', toggleServicios);
-    serviciosBtn.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') toggleServicios(e);
-    });
-    // Cerrar el submenú al tocar fuera (solo mobile)
-    document.addEventListener('click', (e) => {
-      if (window.innerWidth <= 768 && !dropdown.contains(e.target)) {
-        dropdown.classList.remove('open');
-      }
-    });
-  }
-
-  // Formulario (solo si existe en la página)
-  const form = document.getElementById('cotizacionForm');
-  if (form) {
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      const msg = document.getElementById('mensaje-exito');
-      if (msg) msg.style.display = 'block';
-      form.reset();
-    });
-  }
-});
-</script>
 
 </body>
 </html>
