@@ -224,10 +224,21 @@ nav a:hover, .dropdown:hover .dropbtn {
   font-weight: bold;
 }
 
-.cotizacion button:hover {
+  .cotizacion button:hover {
   background-color: #1b263b;
 }
 
+.submenu-items {
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Cuando está abierto (gracias a JS) */
+.submenu-items.open {
+  display: block;
+}
 /* ====== FOOTER ====== */
 footer {
   background-color: #0d1b2a;
@@ -349,6 +360,15 @@ document.getElementById('cotizacionForm').addEventListener('submit', function (e
   document.getElementById('mensaje-exito').style.display = 'block';
   this.reset();
 });
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".submenu-toggle").forEach(function (item) {
+      item.addEventListener("click", function (e) {
+        e.preventDefault(); // evita que el link salte arriba
+        let submenu = this.nextElementSibling;
+        submenu.classList.toggle("open");
+      });
+    });
+  });
 </script>
 
 </body>
