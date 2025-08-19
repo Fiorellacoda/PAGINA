@@ -74,14 +74,10 @@ nav a:hover, .dropdown:hover .dropbtn {
   background-color: #e0e0e0;
 }
 
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-  /* Nuevo para móviles */
+/* Mostrar dropdown en móvil al click */
 .show-dropdown {
   display: block !important;
 }
-
 
 /* ====== HERO ====== */
 .hero {
@@ -283,13 +279,13 @@ footer {
 <header>
   <div class="logo">ONDA</div>
   <nav id="nav-links">
-    <a href="Pag.html">Inicio</a>
+    <a href="index.html">Inicio</a>
     <div class="dropdown">
-      <span class="dropbtn">Servicios</span>
-      <div class="dropdown-content">
+      <span class="dropbtn" id="servicios-btn">Servicios</span>
+      <div class="dropdown-content" id="dropdown-servicios">
         <a href="creacion.html">Creación de Páginas Web</a>
         <a href="automatizaciones.html">Automatizaciones</a>
-        <a href="dashboard.html">Dashboards Interactivos</a>
+        <a href="dashboards.html">Dashboards Interactivos</a>
       </div>
     </div>
     <a href="contacto.html">Contacto</a>
@@ -324,7 +320,7 @@ footer {
     <div class="card">
       <h3>Dashboards Interactivos</h3>
       <p>Visualizá tus métricas clave en tiempo real con dashboards inteligentes y personalizados.</p>
-      <a href="dashboard.html">Ver más</a>
+      <a href="dashboards.html">Ver más</a>
     </div>
   </div>
 </section>
@@ -351,12 +347,12 @@ document.getElementById('menu-toggle').addEventListener('click', function () {
 });
 
 // --- Dropdown servicios en móviles ---
-const serviciosBtn = document.getElementById('servicios-btn'); // el span "Servicios"
-const dropdownServicios = document.getElementById('dropdown-servicios'); // div del dropdown
+const serviciosBtn = document.getElementById('servicios-btn');
+const dropdownServicios = document.getElementById('dropdown-servicios');
 
 serviciosBtn.addEventListener('click', function (e) {
-  e.preventDefault(); // evita que el click haga scroll o se comporte raro
-  dropdownServicios.classList.toggle('show-dropdown'); // abre/cierra el dropdown
+  e.preventDefault();
+  dropdownServicios.classList.toggle('show-dropdown');
 });
 
 // --- Envío de formulario ---
@@ -366,7 +362,6 @@ document.getElementById('cotizacionForm').addEventListener('submit', function (e
   this.reset();
 });
 </script>
-
 
 </body>
 </html>
