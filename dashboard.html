@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ONDA - Dashboards Interactivos</title>
+<style>
+/* Reset */
+* {margin: 0; padding: 0; box-sizing: border-box;}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #0d1b2a;
+}
+
+/* HEADER */
+header {
+  background-color: #0d1b2a;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+nav a, .dropbtn {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+nav a:hover, .dropdown:hover .dropbtn {
+  background-color: #1b263b;
+  border-radius: 5px;
+}
+
+/* Dropdown */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 200px;
+  top: 100%;
+  left: 0;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  z-index: 999;
+}
+
+.dropdown-content a {
+  color: #0d1b2a;
+  padding: 10px;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #e0e0e0;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* HERO */
+.hero {
+  background-color: #0d1b2a;
+  color: white;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.hero-text {
+  flex: 1;
+  min-width: 280px;
+}
+
+.hero-text h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.hero-text p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.hero-img {
+  flex: 1;
+  min-width: 280px;
+  text-align: center;
+}
+
+.hero-img img {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+/* SECCIÓN DE PLANES */
+.section {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  flex: 1 1 250px;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+}
+
+.card span {
+  display: block;
+  font-weight: bold;
+  color: #c9a646;
+  margin-top: 10px;
+}
+
+.btn-whatsapp {
+  background-color: #c9a646;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  margin-top: 10px;
+  display: inline-block;
+  font-weight: bold;
+}
+
+.btn-whatsapp:hover {
+  background-color: #b38e3c;
+}
+
+/* FOOTER */
+footer {
+  background-color: #0d1b2a;
+  color: white;
+  text-align: center;
+  padding: 15px;
+}
+
+/* RESPONSIVE */
+.menu-toggle {
+  display: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  nav {
+    display: none;
+    flex-direction: column;
+    background-color: #0d1b2a;
+    width: 100%;
+    position: absolute;
+    top: 60px;
+    left: 0;
+  }
+  nav.show {
+    display: flex;
+  }
+  .menu-toggle {
+    display: block;
+  }
+  .dropdown-content {
+    position: static;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">ONDA</div>
+  <nav id="nav-links">
+    <a href="Pag.html">Inicio</a>
+    <div class="dropdown">
+      <span class="dropbtn">Servicios</span>
+      <div class="dropdown-content">
+        <a href="creacion.html">Creación de Páginas Web</a>
+        <a href="automatizaciones.html">Automatizaciones</a>
+        <a href="dashboards.html">Dashboards Interactivos</a>
+      </div>
+    </div>
+    <a href="contacto.html">Contacto</a>
+  </nav>
+  <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+</header>
+
+<section class="hero">
+  <div class="hero-text">
+    <h1>Dashboards Interactivos para tu Negocio</h1>
+    <p>Transformá tus datos en decisiones rápidas y efectivas. Con nuestros dashboards, toda la información clave de tu empresa estará siempre a la vista.</p>
+  </div>
+  <div class="hero-img">
+    <img src="kpi-8720963_1280.png" alt="Dashboards Interactivos">
+  </div>
+</section>
+
+<section class="section">
+  <div class="cards">
+
+    <div class="card">
+      <div>
+        <h3>📊 Dashboard Inteligente</h3>
+        <p>Convierte tus datos en decisiones inteligentes con un Dashboard moderno, diseñado para mostrarte en segundos tus ventas, stock, clientes y rendimiento. Olvidate de revisar hojas de cálculo infinitas: todo lo que necesitás, en un solo lugar y siempre actualizado.</p>
+        <span>➡ Descubrí cómo tu negocio puede crecer cuando tenés la información en la palma de tu mano.</span>
+        <a class="btn-whatsapp" href="https://wa.me/5491157359777?text=Hola,%20quiero%20información%20sobre%20el%20Dashboard%20Inteligente" target="_blank">💬 Contactar por WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div>
+        <h3>🚀 Dashboard Integral de Negocio</h3>
+        <p>Más que un dashboard: una central de control para tu empresa. Integramos ventas, marketing, finanzas, inventario y proyecciones en un sistema único y 100% personalizado. Incluye reportes automáticos, alertas inteligentes y consultoría para que tu negocio no solo funcione… sino que crezca.</p>
+        <span>➡ Entrá y conocé la herramienta que transforma números en resultados.</span>
+        <a class="btn-whatsapp" href="https://wa.me/5491157359777?text=Hola,%20quiero%20información%20sobre%20el%20Dashboard%20Integral%20de%20Negocio" target="_blank">💬 Contactar por WhatsApp</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 ONDA - Todos los derechos reservados</p>
+</footer>
+
+<script>
+document.getElementById('menu-toggle').addEventListener('click', function () {
+  document.getElementById('nav-links').classList.toggle('show');
+});
+</script>
+
+</body>
+</html>
