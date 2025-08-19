@@ -23,6 +23,7 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 12px 20px;
+  position: relative;
 }
 
 .logo {
@@ -41,6 +42,12 @@ nav a, .dropbtn {
   text-decoration: none;
   padding: 10px;
   cursor: pointer;
+}
+
+.dropbtn {             /* reset del botón para que parezca link */
+  background: none;
+  border: 0;
+  font: inherit;
 }
 
 nav a:hover, .dropdown:hover .dropbtn {
@@ -74,7 +81,13 @@ nav a:hover, .dropdown:hover .dropbtn {
   background-color: #e0e0e0;
 }
 
+/* Desktop: abre por hover */
 .dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Mobile: abre por clase .open */
+.dropdown.open .dropdown-content {
   display: block;
 }
 
@@ -89,20 +102,9 @@ nav a:hover, .dropdown:hover .dropbtn {
   padding: 60px 20px;
 }
 
-.hero-text {
-  flex: 1;
-  min-width: 280px;
-}
-
-.hero-text h1 {
-  font-size: 2.2rem;
-  margin-bottom: 20px;
-}
-
-.hero-text p {
-  margin-bottom: 20px;
-  font-size: 1rem;
-}
+.hero-text { flex: 1; min-width: 280px; }
+.hero-text h1 { font-size: 2.2rem; margin-bottom: 20px; }
+.hero-text p { margin-bottom: 20px; font-size: 1rem; }
 
 .hero-text button {
   background-color: #c9a646;
@@ -113,120 +115,48 @@ nav a:hover, .dropdown:hover .dropbtn {
   font-weight: bold;
   border-radius: 5px;
 }
+.hero-text button:hover { background-color: #b38e3c; }
 
-.hero-text button:hover {
-  background-color: #b38e3c;
-}
-
-.hero-img {
-  flex: 1;
-  min-width: 280px;
-  text-align: center;
-}
-
-.hero-img img {
-  max-width: 100%;
-  border-radius: 10px;
-}
+.hero-img { flex: 1; min-width: 280px; text-align: center; }
+.hero-img img { max-width: 100%; border-radius: 10px; }
 
 /* ====== SERVICIOS ====== */
-.section {
-  padding: 60px 20px;
-  text-align: center;
-}
-
-.section h2 {
-  font-size: 2rem;
-  margin-bottom: 40px;
-}
+.section { padding: 60px 20px; text-align: center; }
+.section h2 { font-size: 2rem; margin-bottom: 40px; }
 
 .cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;
 }
-
 .card {
-  background: white;
-  padding: 25px;
-  border-radius: 10px;
+  background: white; padding: 25px; border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  flex: 1 1 250px;
-  max-width: 300px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  flex: 1 1 250px; max-width: 300px;
+  display: flex; flex-direction: column; justify-content: space-between;
   transition: transform 0.3s;
 }
-
-.card:hover {
-  transform: translateY(-5px);
-}
-
-.card h3 {
-  font-size: 1.2rem;
-  margin-bottom: 12px;
-}
-
-.card p {
-  font-size: 0.95rem;
-  margin-bottom: 15px;
-}
-
+.card:hover { transform: translateY(-5px); }
+.card h3 { font-size: 1.2rem; margin-bottom: 12px; }
+.card p { font-size: 0.95rem; margin-bottom: 15px; }
 .card a {
-  display: inline-block;
-  margin-top: auto;
-  background-color: #0d1b2a;
-  color: white;
-  padding: 10px 16px;
-  text-decoration: none;
-  border-radius: 5px;
-  font-weight: bold;
+  display: inline-block; margin-top: auto; background-color: #0d1b2a;
+  color: white; padding: 10px 16px; text-decoration: none; border-radius: 5px; font-weight: bold;
 }
-
-.card a:hover {
-  background-color: #1b263b;
-}
+.card a:hover { background-color: #1b263b; }
 
 /* ====== COTIZACIÓN ====== */
-.cotizacion {
-  background-color: #f4f4f4;
-  padding: 60px 20px;
-}
-
-.cotizacion h2 {
-  text-align: center;
-  margin-bottom: 30px;
-  font-size: 2rem;
-}
+.cotizacion { background-color: #f4f4f4; padding: 60px 20px; }
+.cotizacion h2 { text-align: center; margin-bottom: 30px; font-size: 2rem; }
 
 .cotizacion form {
-  max-width: 450px;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  max-width: 450px; margin: auto; display: flex; flex-direction: column; gap: 12px;
 }
-
 .cotizacion input, .cotizacion textarea, .cotizacion button {
-  padding: 12px;
-  font-size: 1rem;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+  padding: 12px; font-size: 1rem; border-radius: 5px; border: 1px solid #ccc;
 }
-
 .cotizacion button {
-  background-color: #0d1b2a;
-  color: white;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
+  background-color: #0d1b2a; color: white; border: none; cursor: pointer; font-weight: bold;
 }
-
-.cotizacion button:hover {
-  background-color: #1b263b;
-}
+.cotizacion button:hover { background-color: #1b263b; }
 
 /* ====== FOOTER ====== */
 footer {
@@ -238,11 +168,7 @@ footer {
 }
 
 /* ====== RESPONSIVE ====== */
-.menu-toggle {
-  display: none;
-  font-size: 1.8rem;
-  cursor: pointer;
-}
+.menu-toggle { display: none; font-size: 1.8rem; cursor: pointer; }
 
 @media (max-width: 768px) {
   nav {
@@ -251,25 +177,14 @@ footer {
     background-color: #0d1b2a;
     width: 100%;
     position: absolute;
-    top: 60px;
-    left: 0;
+    top: 60px; left: 0;
+    z-index: 1000;   /* asegura que quede por delante */
   }
-  nav.show {
-    display: flex;
-  }
-  .menu-toggle {
-    display: block;
-  }
-  .dropdown-content {
-    position: static;
-  }
-  .hero {
-    flex-direction: column;
-    text-align: center;
-  }
-  .hero-text button {
-    margin-bottom: 20px;
-  }
+  nav.show { display: flex; }
+  .menu-toggle { display: block; }
+  .dropdown-content { position: static; } /* el submenú baja en flujo normal */
+  .hero { flex-direction: column; text-align: center; }
+  .hero-text button { margin-bottom: 20px; }
 }
 </style>
 </head>
@@ -279,8 +194,8 @@ footer {
   <div class="logo">ONDA</div>
   <nav id="nav-links">
     <a href="Pag.html">Inicio</a>
-    <div class="dropdown">
-      <span class="dropbtn" id="servicios-btn">Servicios ▾</span>
+    <div class="dropdown" id="servicios-dropdown">
+      <button class="dropbtn" id="servicios-btn" type="button">Servicios ▾</button>
       <div class="dropdown-content" id="servicios-menu">
         <a href="creacion.html">Creación de Páginas Web</a>
         <a href="automatizaciones.html">Automatizaciones</a>
@@ -340,27 +255,49 @@ footer {
 </footer>
 
 <script>
+document.addEventListener('DOMContentLoaded', function () {
   // Menú hamburguesa en celular
-  document.getElementById('menu-toggle').addEventListener('click', function () {
-    document.getElementById('nav-links').classList.toggle('show');
-  });
+  const nav = document.getElementById('nav-links');
+  const menuToggle = document.getElementById('menu-toggle');
+  if (menuToggle && nav) {
+    menuToggle.addEventListener('click', function () {
+      nav.classList.toggle('show');
+    });
+  }
 
-  // Formulario
-  document.getElementById('cotizacionForm').addEventListener('submit', function (e) {
-    e.preventDefault();
-    document.getElementById('mensaje-exito').style.display = 'block';
-    this.reset();
-  });
+  // Servicios en mobile (toggle por click)
+  const dropdown = document.getElementById('servicios-dropdown');
+  const serviciosBtn = document.getElementById('servicios-btn');
+  if (dropdown && serviciosBtn) {
+    const toggleServicios = (e) => {
+      if (window.innerWidth <= 768) {
+        e.preventDefault();
+        dropdown.classList.toggle('open'); // .open muestra el submenú en mobile
+      }
+    };
+    serviciosBtn.addEventListener('click', toggleServicios);
+    serviciosBtn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') toggleServicios(e);
+    });
+    // Cerrar el submenú al tocar fuera (solo mobile)
+    document.addEventListener('click', (e) => {
+      if (window.innerWidth <= 768 && !dropdown.contains(e.target)) {
+        dropdown.classList.remove('open');
+      }
+    });
+  }
 
-  // Servicios en mobile
-  document.getElementById("servicios-btn").addEventListener("click", function (e) {
-    // En mobile alterna mostrar/ocultar
-    if (window.innerWidth <= 768) {
+  // Formulario (solo si existe en la página)
+  const form = document.getElementById('cotizacionForm');
+  if (form) {
+    form.addEventListener('submit', function (e) {
       e.preventDefault();
-      let submenu = document.getElementById("servicios-menu");
-      submenu.style.display = submenu.style.display === "block" ? "none" : "block";
-    }
-  });
+      const msg = document.getElementById('mensaje-exito');
+      if (msg) msg.style.display = 'block';
+      form.reset();
+    });
+  }
+});
 </script>
 
 </body>
