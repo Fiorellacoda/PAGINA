@@ -345,16 +345,28 @@ footer {
 </footer>
 
 <script>
+// --- Menú hamburguesa ---
 document.getElementById('menu-toggle').addEventListener('click', function () {
   document.getElementById('nav-links').classList.toggle('show');
 });
 
+// --- Dropdown servicios en móviles ---
+const serviciosBtn = document.getElementById('servicios-btn'); // el span "Servicios"
+const dropdownServicios = document.getElementById('dropdown-servicios'); // div del dropdown
+
+serviciosBtn.addEventListener('click', function (e) {
+  e.preventDefault(); // evita que el click haga scroll o se comporte raro
+  dropdownServicios.classList.toggle('show-dropdown'); // abre/cierra el dropdown
+});
+
+// --- Envío de formulario ---
 document.getElementById('cotizacionForm').addEventListener('submit', function (e) {
   e.preventDefault();
   document.getElementById('mensaje-exito').style.display = 'block';
   this.reset();
 });
 </script>
+
 
 </body>
 </html>
