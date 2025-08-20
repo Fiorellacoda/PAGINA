@@ -73,10 +73,6 @@ nav a:hover, .dropdown:hover .dropbtn {
   background-color: #e0e0e0;
 }
 
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
 /* HERO */
 .hero {
   background-color: #0d1b2a;
@@ -262,12 +258,23 @@ footer {
 </section>
 
 <footer>
-  <p>© 2025 ONDA - Todos los derechos reservados</p>
+  <p>©️ 2025 ONDA - Todos los derechos reservados</p>
 </footer>
 
 <script>
 document.getElementById('menu-toggle').addEventListener('click', function () {
   document.getElementById('nav-links').classList.toggle('show');
+});
+
+// Para móviles: abrir/cerrar Servicios con click
+document.querySelectorAll('.dropbtn').forEach(function (btn) {
+  btn.addEventListener('click', function (e) {
+    if (window.innerWidth <= 768) {
+      e.preventDefault();
+      const dropdown = this.nextElementSibling;
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+  });
 });
 </script>
 
