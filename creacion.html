@@ -22,6 +22,7 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 12px 20px;
+  position: relative;
 }
 
 .logo {
@@ -67,12 +68,14 @@ nav a:hover, .dropdown:hover .dropbtn {
   color: #0d1b2a;
   padding: 10px;
   display: block;
+  text-decoration: none;
 }
 
 .dropdown-content a:hover {
   background-color: #e0e0e0;
 }
 
+/* Mostrar dropdown en PC con hover */
 .dropdown:hover .dropdown-content {
   display: block;
 }
@@ -214,6 +217,11 @@ footer {
   }
   .dropdown-content {
     position: static;
+    background: #1b263b;
+    box-shadow: none;
+  }
+  .dropdown-content a {
+    color: white;
   }
 }
 </style>
@@ -225,8 +233,8 @@ footer {
   <nav id="nav-links">
     <a href="index.html">Inicio</a>
     <div class="dropdown">
-      <span class="dropbtn">Servicios</span>
-      <div class="dropdown-content">
+      <span class="dropbtn" id="services-btn">Servicios ▾</span>
+      <div class="dropdown-content" id="services-menu">
         <a href="creacion.html">Creación de Páginas Web</a>
         <a href="automatizaciones.html">Automatizaciones</a>
         <a href="dashboard.html">Dashboards Interactivos</a>
@@ -304,12 +312,18 @@ footer {
 </section>
 
 <footer>
-  <p>© 2025 ONDA - Todos los derechos reservados</p>
+  <p>©️ 2025 ONDA - Todos los derechos reservados</p>
 </footer>
 
 <script>
 document.getElementById('menu-toggle').addEventListener('click', function () {
   document.getElementById('nav-links').classList.toggle('show');
+});
+
+// Para abrir/cerrar Servicios en mobile
+document.getElementById('services-btn').addEventListener('click', function (e) {
+  e.preventDefault();
+  document.getElementById('services-menu').classList.toggle('show');
 });
 </script>
 
