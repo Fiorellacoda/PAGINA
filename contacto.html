@@ -8,11 +8,8 @@
 /* Reset */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-body {
-  font-family: Arial, sans-serif;
-  color: #0d1b2a;
-  line-height: 1.6;
-}
+/* Tipografía y colores */
+body { font-family: Arial, sans-serif; line-height: 1.6; color: #0d1b2a; }
 
 /* ====== HEADER ====== */
 header {
@@ -54,24 +51,27 @@ details[open] > .dropdown-content { display: block; }
 }
 .dropdown-content a:hover { background-color: #e0e0e0; }
 
-/* ====== FORMULARIO CONTACTO ====== */
+/* ====== CONTACTO ====== */
+.section { padding: 60px 20px; text-align: center; }
+.section h2 { font-size: 2rem; margin-bottom: 20px; }
+
 .container {
   max-width: 600px;
-  margin: 40px auto;
+  margin: 0 auto;
   background: #f4f4f4;
   padding: 30px 20px;
   border-radius: 8px;
 }
-h1 {
-  text-align: center;
+.container p {
   margin-bottom: 20px;
 }
 form input, form textarea, form button {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   margin-bottom: 15px;
   font-size: 1rem;
-  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
 button, .btn-presupuesto {
   background-color: #0d1b2a;
@@ -80,6 +80,7 @@ button, .btn-presupuesto {
   cursor: pointer;
   font-weight: bold;
   padding: 12px;
+  border-radius: 5px;
 }
 button:hover, .btn-presupuesto:hover {
   background-color: #1b263b;
@@ -88,16 +89,11 @@ button:hover, .btn-presupuesto:hover {
   margin-top: 30px;
   font-size: 1rem;
   line-height: 1.5;
+  text-align: left;
 }
 
 /* ====== FOOTER ====== */
-footer {
-  background-color: #0d1b2a;
-  color: white;
-  text-align: center;
-  padding: 15px;
-  margin-top: 40px;
-}
+footer { background-color: #0d1b2a; color: white; text-align: center; padding: 20px; margin-top: 40px; }
 
 /* ====== RESPONSIVE ====== */
 @media (max-width: 768px) {
@@ -107,6 +103,7 @@ footer {
     display: none; flex-direction: column; background-color: #0d1b2a;
     width: 100%; position: absolute; top: 60px; left: 0; z-index: 1000;
   }
+
   .nav-toggle:checked ~ nav { display: flex; }
 
   .dropdown-content { position: static; box-shadow: none; }
@@ -121,12 +118,14 @@ footer {
 <header>
   <div class="logo">ONDA</div>
 
-  <!-- Checkbox para menú hamburguesa -->
+  <!-- Checkbox que controla el menú -->
   <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-hidden="true" />
-  <label for="nav-toggle" class="menu-toggle">&#9776;</label>
+
+  <!-- Botón hamburguesa -->
+  <label for="nav-toggle" class="menu-toggle" aria-label="Abrir o cerrar menú">&#9776;</label>
 
   <nav id="nav-links" aria-label="Navegación principal">
-    <a href="Pag.html">Inicio</a>
+    <a href="index.html">Inicio</a>
 
     <!-- Dropdown sin JS -->
     <details class="dropdown">
@@ -142,26 +141,28 @@ footer {
   </nav>
 </header>
 
-<div class="container">
-  <h1>Contacto</h1>
-  <p>Podés contactarme a través del siguiente formulario o por los medios que figuran abajo.</p>
+<section class="section">
+  <h2>Contacto</h2>
+  <div class="container">
+    <p>Podés contactarme a través del siguiente formulario o por los medios que figuran abajo.</p>
 
-  <form id="contactoForm">
-    <input type="text" name="nombre" placeholder="Tu nombre" required />
-    <input type="email" name="email" placeholder="Tu correo" required />
-    <textarea name="mensaje" placeholder="Tu mensaje" required></textarea>
-    <button type="submit">Enviar</button>
-  </form>
+    <form id="contactoForm">
+      <input type="text" name="nombre" placeholder="Tu nombre" required />
+      <input type="email" name="email" placeholder="Tu correo" required />
+      <textarea name="mensaje" placeholder="Tu mensaje" required></textarea>
+      <button type="submit">Enviar</button>
+    </form>
 
-  <button class="btn-presupuesto" onclick="window.location.href='Pag.html#cotizacion'">Solicitar presupuesto</button>
+    <button class="btn-presupuesto" onclick="window.location.href='index.html#cotizacion'">Solicitar presupuesto</button>
 
-  <div class="info-contacto">
-    <h3>Información de contacto</h3>
-    <p>📧 Email: tuemail@ejemplo.com</p>
-    <p>📱 Teléfono: +54 9 11 1234 5678</p>
-    <p>📍 Ubicación: Buenos Aires, Argentina</p>
+    <div class="info-contacto">
+      <h3>Información de contacto</h3>
+      <p>📧 Email: tuemail@ejemplo.com</p>
+      <p>📱 Teléfono: +54 9 11 1234 5678</p>
+      <p>📍 Ubicación: Buenos Aires, Argentina</p>
+    </div>
   </div>
-</div>
+</section>
 
 <footer>
   <p>© 2025 ONDA - Todos los derechos reservados</p>
