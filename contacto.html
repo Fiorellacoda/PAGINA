@@ -5,90 +5,67 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>ONDA - Contacto</title>
 <style>
+/* Reset */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
 body {
   font-family: Arial, sans-serif;
   color: #0d1b2a;
-  margin: 0;
-  padding: 0;
+  line-height: 1.6;
 }
 
-/* Header y Footer similares a Pag.html */
+/* ====== HEADER ====== */
 header {
-  background-color: #0d1b2a;
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 20px;
+  background-color: #0d1b2a; color: white;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 20px; position: relative;
+}
+.logo { font-size: 1.8rem; font-weight: bold; }
+
+/* Toggle (checkbox hack) */
+.nav-toggle { display: none; }
+.menu-toggle {
+  display: none; font-size: 1.8rem; cursor: pointer; user-select: none;
 }
 
-.logo {
-  font-size: 1.8rem;
-  font-weight: bold;
-}
-
+/* Nav */
 nav {
-  display: flex;
-  align-items: center;
-  gap: 20px;
+  display: flex; align-items: center; gap: 20px;
+}
+nav a, summary.dropbtn {
+  color: white; text-decoration: none; padding: 10px; cursor: pointer;
+}
+nav a:hover, details.dropdown:hover > summary.dropbtn {
+  background-color: #1b263b; border-radius: 5px;
 }
 
-nav a, .dropbtn {
-  color: white;
-  text-decoration: none;
-  padding: 10px;
-  cursor: pointer;
-}
-
-nav a:hover, .dropdown:hover .dropbtn {
-  background-color: #1b263b;
-  border-radius: 5px;
-}
-
-/* Dropdown */
-.dropdown {
-  position: relative;
-}
-
+/* Dropdown con <details> */
+details.dropdown { position: relative; }
+summary.dropbtn { list-style: none; }
+summary.dropbtn::-webkit-details-marker { display: none; }
 .dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: white;
-  min-width: 160px;
-  top: 100%;
-  left: 0;
-  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-  z-index: 999;
+  position: absolute; top: 100%; left: 0; min-width: 200px;
+  background: white; color: #0d1b2a; display: none;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 999;
 }
-
+details[open] > .dropdown-content { display: block; }
 .dropdown-content a {
-  color: #0d1b2a;
-  padding: 10px;
-  display: block;
+  color: #0d1b2a; padding: 10px; display: block; text-decoration: none;
 }
+.dropdown-content a:hover { background-color: #e0e0e0; }
 
-.dropdown-content a:hover {
-  background-color: #e0e0e0;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
+/* ====== FORMULARIO CONTACTO ====== */
 .container {
   max-width: 600px;
   margin: 40px auto;
   background: #f4f4f4;
   padding: 30px 20px;
   border-radius: 8px;
-  box-sizing: border-box;
 }
-
 h1 {
   text-align: center;
   margin-bottom: 20px;
 }
-
 form input, form textarea, form button {
   width: 100%;
   padding: 10px;
@@ -96,7 +73,6 @@ form input, form textarea, form button {
   font-size: 1rem;
   box-sizing: border-box;
 }
-
 button, .btn-presupuesto {
   background-color: #0d1b2a;
   color: white;
@@ -105,17 +81,16 @@ button, .btn-presupuesto {
   font-weight: bold;
   padding: 12px;
 }
-
 button:hover, .btn-presupuesto:hover {
   background-color: #1b263b;
 }
-
 .info-contacto {
   margin-top: 30px;
   font-size: 1rem;
   line-height: 1.5;
 }
 
+/* ====== FOOTER ====== */
 footer {
   background-color: #0d1b2a;
   color: white;
@@ -124,32 +99,20 @@ footer {
   margin-top: 40px;
 }
 
-/* Responsive para menú */
-.menu-toggle {
-  display: none;
-  font-size: 1.8rem;
-  cursor: pointer;
-}
-
+/* ====== RESPONSIVE ====== */
 @media (max-width: 768px) {
+  .menu-toggle { display: block; }
+
   nav {
-    display: none;
-    flex-direction: column;
-    background-color: #0d1b2a;
-    width: 100%;
-    position: absolute;
-    top: 60px;
-    left: 0;
+    display: none; flex-direction: column; background-color: #0d1b2a;
+    width: 100%; position: absolute; top: 60px; left: 0; z-index: 1000;
   }
-  nav.show {
-    display: flex;
-  }
-  .menu-toggle {
-    display: block;
-  }
-  .dropdown-content {
-    position: static;
-  }
+  .nav-toggle:checked ~ nav { display: flex; }
+
+  .dropdown-content { position: static; box-shadow: none; }
+  details[open] > .dropdown-content { display: block; }
+
+  nav a, summary.dropbtn { padding: 14px 16px; }
 }
 </style>
 </head>
@@ -157,19 +120,26 @@ footer {
 
 <header>
   <div class="logo">ONDA</div>
-  <nav id="nav-links">
-    <a href="index.html">Inicio</a>
-    <div class="dropdown">
-      <span class="dropbtn">Servicios</span>
-      <div class="dropdown-content">
-        <a href="creacion.html">Creación de Páginas Web</a>
-        <a href="automatizaciones.html">Automatizaciones</a>
-        <a href="dashboard.html">Dashboards Interactivos</a>
+
+  <!-- Checkbox para menú hamburguesa -->
+  <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-hidden="true" />
+  <label for="nav-toggle" class="menu-toggle">&#9776;</label>
+
+  <nav id="nav-links" aria-label="Navegación principal">
+    <a href="Pag.html">Inicio</a>
+
+    <!-- Dropdown sin JS -->
+    <details class="dropdown">
+      <summary class="dropbtn" aria-haspopup="true" aria-expanded="false">Servicios ▾</summary>
+      <div class="dropdown-content" role="menu">
+        <a href="creacion.html" role="menuitem">Creación de Páginas Web</a>
+        <a href="automatizaciones.html" role="menuitem">Automatizaciones</a>
+        <a href="dashboard.html" role="menuitem">Dashboards Interactivos</a>
       </div>
-    </div>
+    </details>
+
     <a href="contacto.html">Contacto</a>
   </nav>
-  <div class="menu-toggle" id="menu-toggle">&#9776;</div>
 </header>
 
 <div class="container">
@@ -194,30 +164,15 @@ footer {
 </div>
 
 <footer>
-  <p>©️ 2025 ONDA - Todos los derechos reservados</p>
+  <p>© 2025 ONDA - Todos los derechos reservados</p>
 </footer>
 
 <script>
-  // Menú hamburguesa
-  document.getElementById('menu-toggle').addEventListener('click', function () {
-    document.getElementById('nav-links').classList.toggle('show');
-  });
-
-  // Dropdown en móvil con click
-  document.querySelectorAll('.dropbtn').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-      e.preventDefault();
-      const dropdown = this.nextElementSibling;
-      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
-    });
-  });
-
-  // Formulario
-  document.getElementById('contactoForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    alert('Mensaje enviado. ¡Gracias por contactarte!');
-    this.reset();
-  });
+document.getElementById('contactoForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  alert('Mensaje enviado. ¡Gracias por contactarte!');
+  this.reset();
+});
 </script>
 
 </body>
