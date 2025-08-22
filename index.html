@@ -38,7 +38,9 @@ nav a:hover, details.dropdown:hover > summary.dropbtn {
 
 /* Dropdown con <details> */
 details.dropdown { position: relative; }
-summary.dropbtn { list-style: none; }
+summary.dropbtn {
+  list-style: none;
+}
 summary.dropbtn::-webkit-details-marker { display: none; }
 .dropdown-content {
   position: absolute; top: 100%; left: 0; min-width: 200px;
@@ -105,14 +107,23 @@ footer { background-color: #0d1b2a; color: white; text-align: center; padding: 2
 /* ====== RESPONSIVE ====== */
 @media (max-width: 768px) {
   .menu-toggle { display: block; }
+
   nav {
     display: none; flex-direction: column; background-color: #0d1b2a;
     width: 100%; position: absolute; top: 60px; left: 0; z-index: 1000;
   }
+
   .nav-toggle:checked ~ nav { display: flex; }
-  .dropdown-content { position: static; box-shadow: none; }
+
+  /* Submenú ocupa todo el ancho y se muestra sin overflow */
+  .dropdown-content {
+    position: static;
+    min-width: 100%;
+    box-shadow: none;
+  }
   details[open] > .dropdown-content { display: block; }
-  nav a, summary.dropbtn { padding: 14px 16px; }
+
+  nav a, summary.dropbtn { padding: 14px 16px; text-align: left; }
 }
 </style>
 </head>
@@ -120,11 +131,13 @@ footer { background-color: #0d1b2a; color: white; text-align: center; padding: 2
 
 <header>
   <div class="logo">ONDA</div>
+
   <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-hidden="true" />
   <label for="nav-toggle" class="menu-toggle" aria-label="Abrir o cerrar menú">&#9776;</label>
 
   <nav id="nav-links" aria-label="Navegación principal">
     <a href="index.html">Inicio</a>
+
     <details class="dropdown">
       <summary class="dropbtn" aria-haspopup="true" aria-expanded="false">Servicios ▾</summary>
       <div class="dropdown-content" role="menu">
@@ -181,4 +194,3 @@ footer { background-color: #0d1b2a; color: white; text-align: center; padding: 2
 
 </body>
 </html>
-
