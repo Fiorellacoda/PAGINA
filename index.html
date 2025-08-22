@@ -8,7 +8,6 @@
 /* Reset */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* Tipografía y colores */
 body { font-family: Arial, sans-serif; line-height: 1.6; color: #0d1b2a; }
 
 /* ====== HEADER ====== */
@@ -111,14 +110,15 @@ footer { background-color: #0d1b2a; color: white; text-align: center; padding: 2
   nav {
     display: none; flex-direction: column; background-color: #0d1b2a;
     width: 100%; position: absolute; top: 60px; left: 0; z-index: 1000;
+    overflow: hidden;
   }
 
   .nav-toggle:checked ~ nav { display: flex; }
 
-  /* Submenú ocupa todo el ancho y se muestra sin overflow */
+  /* Submenú ocupa todo el ancho y no provoca scroll */
   .dropdown-content {
-    position: static;
-    min-width: 100%;
+    position: relative;
+    width: 100%;
     box-shadow: none;
   }
   details[open] > .dropdown-content { display: block; }
@@ -194,3 +194,4 @@ footer { background-color: #0d1b2a; color: white; text-align: center; padding: 2
 
 </body>
 </html>
+
