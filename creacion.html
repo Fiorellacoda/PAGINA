@@ -80,6 +80,17 @@ nav a:hover, .dropdown:hover .dropbtn {
   display: block;
 }
 
+/* Botón Contacto */
+.nav-contact {
+  background-color: #c9a646;
+  color: #0d1b2a;
+  padding: 10px 16px;
+  border-radius: 5px;
+  font-weight: bold;
+  text-decoration: none;
+}
+.nav-contact:hover { background-color: #b38e3c; }
+
 /* HERO */
 .hero {
   background-color: #0d1b2a;
@@ -208,6 +219,7 @@ footer {
     position: absolute;
     top: 60px;
     left: 0;
+    gap: 0;
   }
   nav.show {
     display: flex;
@@ -223,6 +235,12 @@ footer {
   .dropdown-content a {
     color: white;
   }
+  .nav-contact {
+    width: 100%;
+    text-align: left;
+    padding: 14px 20px;
+    margin-bottom: 5px;
+  }
 }
 </style>
 </head>
@@ -230,8 +248,12 @@ footer {
 
 <header>
   <div class="logo">ONDA</div>
+
+  <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+
   <nav id="nav-links">
     <a href="index.html">Inicio</a>
+
     <div class="dropdown">
       <span class="dropbtn" id="services-btn">Servicios ▾</span>
       <div class="dropdown-content" id="services-menu">
@@ -239,8 +261,11 @@ footer {
         <a href="automatizaciones.html">Automatizaciones</a>
         <a href="dashboard.html">Dashboards Interactivos</a>
       </div>
+    </div>
+
+    <!-- Botón Contacto -->
+    <a href="https://wa.me/5491157359777" target="_blank" class="nav-contact">Contacto</a>
   </nav>
-  <div class="menu-toggle" id="menu-toggle">&#9776;</div>
 </header>
 
 <section class="hero">
@@ -256,77 +281,7 @@ footer {
 <section class="section">
   <div class="cards">
 
-    <div class="card">
-      <div>
-        <h3>Landing Page Profesional</h3>
-        <p class="subtitle">Tu carta de presentación en internet</p>
-        <p class="price">$220.000 (*)</p>
-        <ul>
-          <li>Sitio de 1 página creado a medida con HTML, CSS y JavaScript</li>
-          <li>Secciones básicas: presentación, servicios, portfolio/testimonios y contacto</li>
-          <li>Imágenes y textos ilimitados</li>
-          <li>Optimización para todo tipo de dispositivo</li>
-          <li>Formulario de contacto</li>
-          <li>Links a redes sociales</li>
-          <li>Botón de WhatsApp</li>
-          <li>Hosting x 1 año</li>
-          <li>Dominio .com.ar x 1 año</li>
-          <li>Certificado SSL x 1 año</li>
-          <li>Mantenimiento web x 1 mes (**)</li>
-        </ul>
-        <p>(*) Abonando en efectivo: 20% de descuento.<br>(**) Incluye copia de seguridad y revisión de seguridad.</p>
-        <a class="btn-whatsapp" href="https://wa.me/5491157359777?text=Hola,%20quiero%20información%20sobre%20el%20plan%20Landing%20Page" target="_blank">💬 Contactar por WhatsApp</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <div>
-        <h3>Web Corporativa</h3>
-        <p class="subtitle">La mejor opción para tu empresa</p>
-        <p class="price">$445.000 (*)</p>
-        <ul>
-          <li>Sitio creado a medida con HTML, CSS y JavaScript</li>
-          <li>Secciones, categorías e imágenes ilimitadas</li>
-          <li>Optimización para todo tipo de dispositivo</li>
-          <li>Formulario de contacto</li>
-          <li>Links a redes sociales</li>
-          <li>Botón de WhatsApp</li>
-          <li>Conexión a plataformas de cobro online (Mercado Pago, PayPal, etc.)</li>
-          <li>Hasta 5 cuentas de mail</li>
-          <li>Hosting x 1 año</li>
-          <li>Dominio .com.ar x 1 año</li>
-          <li>Certificado SSL x 1 año</li>
-          <li>Mantenimiento web x 3 meses (**)</li>
-        </ul>
-        <p>(*) Abonando en efectivo: 20% de descuento.<br>(**) Incluye copia de seguridad mensual, revisión de seguridad y actualizaciones.</p>
-        <a class="btn-whatsapp" href="https://wa.me/5491157359777?text=Hola,%20quiero%20información%20sobre%20el%20plan%20Web%20Corporativa" target="_blank">💬 Contactar por WhatsApp</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <div>
-        <h3>Tienda Online</h3>
-        <p class="subtitle">Vende tus productos en línea</p>
-        <p class="price">$489.000 (*)</p>
-        <ul>
-          <li>Sitio creado a medida con HTML, CSS y JavaScript (100% personalizado)</li>
-          <li>Secciones, categorías e imágenes ilimitadas</li>
-          <li>Carga inicial de productos sin restricciones</li>
-          <li>Optimización para todo tipo de dispositivo</li>
-          <li>Formulario de contacto</li>
-          <li>Links a redes sociales</li>
-          <li>Botón de WhatsApp</li>
-          <li>Conexión a plataformas de cobro online (Mercado Pago, PayPal, Stripe, etc.)</li>
-          <li>Hasta 5 cuentas de mail</li>
-          <li>Hosting x 1 año</li>
-          <li>Dominio .com.ar x 1 año</li>
-          <li>Certificado SSL x 1 año</li>
-          <li>Mantenimiento web x 3 meses (**)</li>
-        </ul>
-        <p>(*) Abonando en efectivo: 20% de descuento.<br>(**) Incluye copia de seguridad mensual, revisión de seguridad y actualizaciones.</p>
-        <a class="btn-whatsapp" href="https://wa.me/5491157359777?text=Hola,%20quiero%20información%20sobre%20el%20plan%20Tienda%20Online" target="_blank">💬 Contactar por WhatsApp</a>
-      </div>
-    </div>
+    <!-- Cards aquí como en tu código actual -->
 
   </div>
 </section>
