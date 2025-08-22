@@ -20,7 +20,7 @@ header {
 .logo { font-size: 1.8rem; font-weight: bold; }
 
 /* Toggle (checkbox hack) */
-.nav-toggle { display: none; } /* input hidden */
+.nav-toggle { display: none; }
 .menu-toggle {
   display: none; font-size: 1.8rem; cursor: pointer; user-select: none;
 }
@@ -38,10 +38,8 @@ nav a:hover, details.dropdown:hover > summary.dropbtn {
 
 /* Dropdown con <details> */
 details.dropdown { position: relative; }
-summary.dropbtn {
-  list-style: none; /* quita viñetas */
-}
-summary.dropbtn::-webkit-details-marker { display: none; } /* quita triangulito en WebKit */
+summary.dropbtn { list-style: none; }
+summary.dropbtn::-webkit-details-marker { display: none; }
 .dropdown-content {
   position: absolute; top: 100%; left: 0; min-width: 200px;
   background: white; color: #0d1b2a; display: none;
@@ -106,23 +104,14 @@ footer { background-color: #0d1b2a; color: white; text-align: center; padding: 2
 
 /* ====== RESPONSIVE ====== */
 @media (max-width: 768px) {
-  /* Mostrar botón hamburguesa */
   .menu-toggle { display: block; }
-
-  /* Ocultar nav por defecto en mobile */
   nav {
     display: none; flex-direction: column; background-color: #0d1b2a;
     width: 100%; position: absolute; top: 60px; left: 0; z-index: 1000;
   }
-
-  /* Cuando el checkbox está activado, mostrar nav */
   .nav-toggle:checked ~ nav { display: flex; }
-
-  /* El submenú baja en flujo normal */
   .dropdown-content { position: static; box-shadow: none; }
   details[open] > .dropdown-content { display: block; }
-
-  /* Alinear enlaces */
   nav a, summary.dropbtn { padding: 14px 16px; }
 }
 </style>
@@ -131,17 +120,11 @@ footer { background-color: #0d1b2a; color: white; text-align: center; padding: 2
 
 <header>
   <div class="logo">ONDA</div>
-
-  <!-- Checkbox que controla el menú (sin JS) -->
   <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-hidden="true" />
-
-  <!-- Botón hamburguesa -->
   <label for="nav-toggle" class="menu-toggle" aria-label="Abrir o cerrar menú">&#9776;</label>
 
   <nav id="nav-links" aria-label="Navegación principal">
     <a href="index.html">Inicio</a>
-
-    <!-- Dropdown sin JS -->
     <details class="dropdown">
       <summary class="dropbtn" aria-haspopup="true" aria-expanded="false">Servicios ▾</summary>
       <div class="dropdown-content" role="menu">
