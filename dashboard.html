@@ -98,9 +98,14 @@ footer { background-color: #0d1b2a; color: white; text-align: center; padding: 1
     display: none; flex-direction: column; background-color: #0d1b2a;
     width: 100%; position: absolute; top: 60px; left: 0; z-index: 1000;
   }
-  nav.show { display: flex; }
+  /* 👉 REGLA CLAVE: al chequear el checkbox, mostrar el nav */
+  .nav-toggle:checked ~ nav { display: flex; }
+
+  /* El submenú baja en flujo normal en mobile */
   .dropdown-content { position: static; box-shadow: none; }
   details[open] > .dropdown-content { display: block; }
+
+  /* Alinear enlaces */
   nav a, summary.dropbtn { padding: 14px 16px; }
 }
 </style>
@@ -112,11 +117,13 @@ footer { background-color: #0d1b2a; color: white; text-align: center; padding: 1
 
   <!-- Checkbox que controla el menú (sin JS) -->
   <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-hidden="true" />
+  <!-- Botón hamburguesa -->
   <label for="nav-toggle" class="menu-toggle" aria-label="Abrir o cerrar menú">&#9776;</label>
 
   <nav id="nav-links" aria-label="Navegación principal">
     <a href="index.html">Inicio</a>
 
+    <!-- Dropdown sin JS -->
     <details class="dropdown">
       <summary class="dropbtn" aria-haspopup="true" aria-expanded="false">Servicios ▾</summary>
       <div class="dropdown-content" role="menu">
