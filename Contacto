@@ -1,0 +1,56 @@
+// Code.gs
+function doPost(e) {
+  try {
+    // CORS preflight sencillo
+    if (e.postData == null) {
+      return ContentService.createTextOutput('No Content')
+        .setMimeType(ContentService.MimeType.TEXT)
+        .setHeader('Access-Control-Allow-Origin', '*');
+    }
+
+    const data = JSON.parse(e.postData.contents || '{}');
+    const nombre  = (data.nombre  || '').trim();
+    const email   = (data.email   || '').trim();
+    const mensaje = (data.mensaje || '').trim();
+
+    // === Ajusta tu correo de recepción ===
+    const DESTINATARIO = 'tu_correo@gmail.com';
+
+    const asunto = `Nuevo contacto desde ONDA - ${nombre || 'Sin nombre'}`;
+    const htmlBody = `
+      <h2>Nuevo contacto</h2>
+      <p><b>Nombre:</b> ${nombre}</p>
+      <p><b>Email:</b> ${email}</p>
+      <p><b>Mensaje:</b></p>
+      <p>${mensaje.replace(/\n/g,'<br>')}</p>
+    `;
+
+    MailApp.sendEmail({
+      to: DESTINATARIO,
+      replyTo: email || DESTINATARIO,
+      subject: asunto,
+      htmlBody: htmlBody,
+      name: 'Formulario ONDA'
+    });
+
+    return ContentService
+      .createTextOutput(JSON.stringify({ ok: true }))
+      .setMimeType(ContentService.MimeType.JSON)
+      .setHeader('Access-Control-Allow-Origin', '*');
+
+  } catch (err) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ ok: false, error: String(err) }))
+      .setMimeType(ContentService.MimeType.JSON)
+      .setHeader('Access-Control-Allow-Origin', '*');
+  }
+}
+
+// (Opcional) Manejo de preflight CORS si el navegador lo envía
+function doOptions() {
+  return ContentService.createTextOutput('')
+    .setMimeType(ContentService.MimeType.TEXT)
+    .setHeader('Access-Control-Allow-Origin', '*')
+    .setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS')
+    .setHeader('Access-Control-Allow-Headers', 'Content-Type');
+}
