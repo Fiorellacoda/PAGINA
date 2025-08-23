@@ -127,10 +127,20 @@ details[open] > .dropdown-content { display: block; }
 .cotizacion input, .cotizacion textarea, .cotizacion button {
   padding: 12px; font-size: 1rem; border-radius: 5px; border: 1px solid #ccc;
 }
+.cotizacion textarea { min-height: 120px; resize: vertical; }
 .cotizacion button {
   background-color: #0d1b2a; color: white; border: none; cursor: pointer; font-weight: bold;
 }
 .cotizacion button:hover { background-color: #1b263b; }
+
+/* Mensajes de estado */
+#form-status {
+  margin-top: 8px;
+  text-align: left;
+  font-size: 0.95rem;
+}
+.status-ok { color: #0a7d2e; }
+.status-err { color: #b00020; }
 
 /* ====== FOOTER ====== */
 footer { background-color: #0d1b2a; color: white; text-align: center; padding: 20px; margin-top: 20px; }
@@ -160,6 +170,9 @@ footer { background-color: #0d1b2a; color: white; text-align: center; padding: 2
 
   nav a, summary.dropbtn, .nav-contact { padding: 14px 20px; width: 100%; text-align: left; margin-bottom: 5px; }
 }
+
+/* Accesibilidad / honeypot */
+.hp { position: absolute; left: -9999px; opacity: 0; }
 </style>
 </head>
 <body>
@@ -215,19 +228,93 @@ footer { background-color: #0d1b2a; color: white; text-align: center; padding: 2
   </div>
 </section>
 
-<section class="cotizacion">
+<section class="cotizacion" id="cotizacion">
   <h2>Solicitar Cotización</h2>
-  <form>
-    <input type="text" name="nombre" placeholder="Tu nombre" required>
-    <input type="email" name="email" placeholder="Tu correo" required>
+
+  <!-- ====== FORMULARIO FUNCIONAL con FormSubmit ====== -->
+  <!-- Fallback sin JS: envía y redirige a una página de gracias -->
+  <!-- AJAX con JS más abajo para mostrar mensaje en la misma página -->
+  <form id="cotizacionForm"
+        action="https://formsubmit.co/codasoftwarecompany@gmail.com"
+        method="POST">
+
+    <!-- Honeypot antispam -->
+    <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off">
+
+    <!-- Desactivar captcha de FormSubmit (opcional) -->
+    <input type="hidden" name="_captcha" value="false">
+
+    <!-- Asunto del correo -->
+    <input type="hidden" name="_subject" value="Nuevo contacto desde CODA">
+
+    <!-- Redirección en caso de no usar JS -->
+    <input type="hidden" name="_next" value="https://example.com/gracias.html">
+
+    <!-- Plantilla de email en tabla (opcional) -->
+    <input type="hidden" name="_template" value="table">
+
+    <!-- Campos visibles -->
+    <input type="text"   name="nombre"  placeholder="Tu nombre" required>
+    <input type="email"  name="email"   placeholder="Tu correo" required>
     <textarea name="mensaje" placeholder="Describe tu proyecto" required></textarea>
-    <button type="submit">Enviar</button>
+
+    <button type="submit" id="submitBtn">Enviar</button>
+    <div id="form-status" role="status" aria-live="polite"></div>
   </form>
 </section>
 
 <footer>
   <p>©️ 2025 CODA - Todos los derechos reservados</p>
 </footer>
+
+<script>
+/* Envío AJAX para no salir de la página (usa endpoint /ajax/) */
+const form = document.getElementById('cotizacionForm');
+const statusBox = document.getElementById('form-status');
+const submitBtn = document.getElementById('submitBtn');
+
+form.addEventListener('submit', async (e) => {
+  // Si querés que el fallback funcione sin JS, comentá la siguiente línea
+  e.preventDefault();
+
+  // Honeypot: si viene con texto, es bot → no enviar
+  const honey = form.querySelector('input[name="_honey"]');
+  if (honey && honey.value.trim() !== '') return;
+
+  statusBox.textContent = '';
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Enviando…';
+
+  try {
+    const formData = new FormData(form);
+    // Usamos el endpoint AJAX de FormSubmit
+    const res = await fetch('https://formsubmit.co/ajax/codasoftwarecompany@gmail.com', {
+      method: 'POST',
+      body: formData
+    });
+
+    // FormSubmit responde JSON {success: "true"} si salió bien
+    const out = await res.json().catch(() => ({}));
+
+    if (res.ok && (out.success === 'true' || out.success === true)) {
+      statusBox.textContent = '¡Gracias! Tu mensaje fue enviado correctamente.';
+      statusBox.className = 'status-ok';
+      form.reset();
+    } else {
+      statusBox.textContent = 'No se pudo enviar el mensaje. Intentá de nuevo en unos minutos.';
+      statusBox.className = 'status-err';
+      console.error('Respuesta:', out);
+    }
+  } catch (err) {
+    statusBox.textContent = 'Error de red. Verificá tu conexión e intentá nuevamente.';
+    statusBox.className = 'status-err';
+    console.error(err);
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Enviar';
+  }
+});
+</script>
 
 </body>
 </html>
