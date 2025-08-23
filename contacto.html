@@ -62,9 +62,8 @@ details[open] > .dropdown-content { display: block; }
   padding: 30px 20px;
   border-radius: 8px;
 }
-.container p {
-  margin-bottom: 20px;
-}
+.container p { margin-bottom: 20px; }
+
 form input, form textarea, form button {
   width: 100%;
   padding: 12px;
@@ -73,6 +72,8 @@ form input, form textarea, form button {
   border-radius: 5px;
   border: 1px solid #ccc;
 }
+textarea { min-height: 140px; resize: vertical; }
+
 button, .btn-presupuesto {
   background-color: #0d1b2a;
   color: white;
@@ -82,9 +83,8 @@ button, .btn-presupuesto {
   padding: 12px;
   border-radius: 5px;
 }
-button:hover, .btn-presupuesto:hover {
-  background-color: #1b263b;
-}
+button:hover, .btn-presupuesto:hover { background-color: #1b263b; }
+
 .info-contacto {
   margin-top: 30px;
   font-size: 1rem;
@@ -92,8 +92,20 @@ button:hover, .btn-presupuesto:hover {
   text-align: left;
 }
 
+/* Mensajes de estado */
+#form-status {
+  margin-top: 10px;
+  text-align: left;
+  font-size: 0.95rem;
+}
+.status-ok { color: #0a7d2e; }
+.status-err { color: #b00020; }
+
 /* ====== FOOTER ====== */
-footer { background-color: #0d1b2a; color: white; text-align: center; padding: 20px; margin-top: 40px; }
+footer {
+  background-color: #0d1b2a; color: white;
+  text-align: center; padding: 20px; margin-top: 40px;
+}
 
 /* ====== RESPONSIVE ====== */
 @media (max-width: 768px) {
@@ -103,7 +115,6 @@ footer { background-color: #0d1b2a; color: white; text-align: center; padding: 2
     display: none; flex-direction: column; background-color: #0d1b2a;
     width: 100%; position: absolute; top: 60px; left: 0; z-index: 1000;
   }
-
   .nav-toggle:checked ~ nav { display: flex; }
 
   .dropdown-content { position: static; box-shadow: none; }
@@ -111,6 +122,9 @@ footer { background-color: #0d1b2a; color: white; text-align: center; padding: 2
 
   nav a, summary.dropbtn { padding: 14px 16px; }
 }
+
+/* Accesibilidad visual pequeña para campo oculto (honeypot) */
+.hp { position: absolute; left: -9999px; opacity: 0; }
 </style>
 </head>
 <body>
@@ -126,8 +140,6 @@ footer { background-color: #0d1b2a; color: white; text-align: center; padding: 2
 
   <nav id="nav-links" aria-label="Navegación principal">
     <a href="index.html">Inicio</a>
-
-    <!-- Dropdown sin JS -->
     <details class="dropdown">
       <summary class="dropbtn" aria-haspopup="true" aria-expanded="false">Servicios ▾</summary>
       <div class="dropdown-content" role="menu">
@@ -136,8 +148,7 @@ footer { background-color: #0d1b2a; color: white; text-align: center; padding: 2
         <a href="dashboard.html" role="menuitem">Dashboards Interactivos</a>
       </div>
     </details>
-
-    <a href="contacto.html">Contacto</a>
+    <a href="contacto.html" aria-current="page">Contacto</a>
   </nav>
 </header>
 
@@ -146,11 +157,16 @@ footer { background-color: #0d1b2a; color: white; text-align: center; padding: 2
   <div class="container">
     <p>Podés contactarme a través del siguiente formulario o por los medios que figuran abajo.</p>
 
-    <form id="contactoForm">
-      <input type="text" name="nombre" placeholder="Tu nombre" required />
-      <input type="email" name="email" placeholder="Tu correo" required />
-      <textarea name="mensaje" placeholder="Tu mensaje" required></textarea>
-      <button type="submit">Enviar</button>
+    <form id="contactoForm" aria-describedby="form-status">
+      <!-- Honeypot anti-spam (dejar oculto) -->
+      <input type="text" name="company" class="hp" tabindex="-1" autocomplete="off" />
+
+      <input type="text" name="nombre" placeholder="Tu nombre" required aria-label="Nombre" />
+      <input type="email" name="email" placeholder="Tu correo" required aria-label="Correo electrónico" />
+      <textarea name="mensaje" placeholder="Tu mensaje" required aria-label="Mensaje"></textarea>
+
+      <button id="submitBtn" type="submit" aria-label="Enviar formulario">Enviar</button>
+      <div id="form-status" role="status" aria-live="polite"></div>
     </form>
 
     <button class="btn-presupuesto" onclick="window.location.href='index.html#cotizacion'">Solicitar presupuesto</button>
@@ -169,10 +185,88 @@ footer { background-color: #0d1b2a; color: white; text-align: center; padding: 2
 </footer>
 
 <script>
-document.getElementById('contactoForm').addEventListener('submit', function(e) {
+/**
+ * 1) PEGÁ TU URL DE APPS SCRIPT ACÁ:
+ * Ejemplo: const ENDPOINT = 'https://script.google.com/macros/s/AKfycbxxxxxxxx/exec';
+ */
+const ENDPOINT = 'PEGÁ_ACÁ_TU_URL_DE_APPS_SCRIPT';
+
+/**
+ * Opcional: activar verificación básica de email
+ */
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(email).toLowerCase());
+}
+
+const form = document.getElementById('contactoForm');
+const statusBox = document.getElementById('form-status');
+const submitBtn = document.getElementById('submitBtn');
+
+form.addEventListener('submit', async function(e) {
   e.preventDefault();
-  alert('Mensaje enviado. ¡Gracias por contactarte!');
-  this.reset();
+
+  // Limpia mensajes previos
+  statusBox.textContent = '';
+
+  const fd = new FormData(form);
+  const payload = Object.fromEntries(fd.entries());
+
+  // Honeypot: si está completo, abortar (bot)
+  if (payload.company && payload.company.trim() !== '') {
+    return; // silencioso
+  }
+
+  // Validaciones mínimas
+  if (!payload.nombre || !payload.email || !payload.mensaje) {
+    statusBox.textContent = 'Por favor, completá todos los campos.';
+    statusBox.className = 'status-err';
+    return;
+  }
+  if (!isValidEmail(payload.email)) {
+    statusBox.textContent = 'El correo no parece válido.';
+    statusBox.className = 'status-err';
+    return;
+  }
+
+  // UI: deshabilitar botón y mostrar estado
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Enviando…';
+  statusBox.textContent = 'Enviando tu mensaje…';
+  statusBox.className = '';
+
+  try {
+    const res = await fetch(ENDPOINT, {
+      method: 'POST',
+      mode: 'cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        nombre: payload.nombre.trim(),
+        email: payload.email.trim(),
+        mensaje: payload.mensaje.trim()
+      })
+    });
+
+    // Intentar decodificar JSON; si no viene, manejar como error
+    let out = {};
+    try { out = await res.json(); } catch (_) {}
+
+    if (res.ok && out.ok) {
+      statusBox.textContent = 'Mensaje enviado. ¡Gracias por contactarte!';
+      statusBox.className = 'status-ok';
+      form.reset();
+    } else {
+      statusBox.textContent = 'No se pudo enviar el mensaje. Intenta más tarde.';
+      statusBox.className = 'status-err';
+      console.error('Respuesta del servidor:', out);
+    }
+  } catch (err) {
+    console.error(err);
+    statusBox.textContent = 'Error de red. Verifica tu conexión e intenta de nuevo.';
+    statusBox.className = 'status-err';
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Enviar';
+  }
 });
 </script>
 
