@@ -133,7 +133,7 @@ details[open] > .dropdown-content { display: block; }
 }
 .cotizacion button:hover { background-color: #1b263b; }
 
-/* Mensajes de estado (por si luego agregás AJAX) */
+/* Mensajes */
 #form-status { margin-top: 8px; text-align: left; font-size: 0.95rem; }
 .status-ok { color: #0a7d2e; }
 .status-err { color: #b00020; }
@@ -180,7 +180,6 @@ footer { background-color: #0d1b2a; color: white; text-align: center; padding: 2
 
   <nav>
     <a href="index.html">Inicio</a>
-
     <details class="dropdown">
       <summary class="dropbtn">Servicios ▾</summary>
       <div class="dropdown-content">
@@ -189,8 +188,6 @@ footer { background-color: #0d1b2a; color: white; text-align: center; padding: 2
         <a href="dashboard.html">Dashboards Interactivos</a>
       </div>
     </details>
-
-    <!-- Botón Contacto -->
     <a href="https://wa.me/541157359777" target="_blank" class="nav-contact">Contacto</a>
   </nav>
 </header>
@@ -224,12 +221,12 @@ footer { background-color: #0d1b2a; color: white; text-align: center; padding: 2
   </div>
 </section>
 
-<!-- ====== FORMULARIO DE CONTACTO FUNCIONAL ====== -->
+<!-- ====== FORMULARIO DE CONTACTO ====== -->
 <section class="cotizacion" id="cotizacion">
   <h2>Solicitar Cotización</h2>
 
-  <!-- Envío directo a FormSubmit (sin JS) -->
-  <form action="https://formsubmit.co/codasoftwarecompany@gmail.com" method="POST">
+  <!-- 1) Acción HTML estándar (funciona aunque no haya JS) -->
+  <form id="cotizacionForm" action="https://formsubmit.co/codasoftwarecompany@gmail.com" method="POST">
 
     <!-- Honeypot antispam -->
     <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off">
@@ -243,7 +240,7 @@ footer { background-color: #0d1b2a; color: white; text-align: center; padding: 2
     <!-- Plantilla de email en tabla (opcional) -->
     <input type="hidden" name="_template" value="table">
 
-    <!-- (Opcional) Redirección tras enviar: poné tu URL real de gracias -->
+    <!-- (Opcional) Redirección tras enviar (sin JS) -->
     <input type="hidden" name="_next" value="https://example.com/gracias.html">
 
     <!-- Campos -->
@@ -251,11 +248,11 @@ footer { background-color: #0d1b2a; color: white; text-align: center; padding: 2
     <input type="email"  name="email"   placeholder="Tu correo" required>
     <textarea name="mensaje" placeholder="Describe tu proyecto" required></textarea>
 
-    <button type="submit">Enviar</button>
-    <div id="form-status"></div>
+    <button type="submit" id="submitBtn">Enviar</button>
+    <div id="form-status" role="status" aria-live="polite"></div>
   </form>
 
-  <!-- Ayuda: si preferís usar WhatsApp directo -->
+  <!-- Contacto alternativo -->
   <p style="margin-top:14px; font-size:0.95rem;">
     ¿Preferís hablar por WhatsApp? <a href="https://wa.me/541157359777" target="_blank">Escribime acá</a>.
   </p>
@@ -264,6 +261,86 @@ footer { background-color: #0d1b2a; color: white; text-align: center; padding: 2
 <footer>
   <p>©️ 2025 CODA - Todos los derechos reservados</p>
 </footer>
+
+<script>
+/**
+ * 2) INTENTO AJAX + FALLBACK AUTOMÁTICO A MAILTO
+ * - Intenta enviar vía FormSubmit (endpoint AJAX).
+ * - Si falla (token, CORS, etc.), abre el cliente de correo del usuario (mailto)
+ *   con asunto y cuerpo prellenados para que igual te llegue el contacto.
+ */
+const form = document.getElementById('cotizacionForm');
+const statusBox = document.getElementById('form-status');
+const submitBtn = document.getElementById('submitBtn');
+
+form.addEventListener('submit', async (e) => {
+  // Permitimos que, si no hay JS o algo falla muy temprano, el action HTML haga su trabajo.
+  e.preventDefault();
+
+  // Honeypot simple
+  const honey = form.querySelector('input[name="_honey"]');
+  if (honey && honey.value.trim() !== '') return;
+
+  const data = new FormData(form);
+  const nombre  = (data.get('nombre')  || '').toString().trim();
+  const email   = (data.get('email')   || '').toString().trim();
+  const mensaje = (data.get('mensaje') || '').toString().trim();
+
+  // Validación mínima
+  if (!nombre || !email || !mensaje) {
+    statusBox.textContent = 'Completá todos los campos.';
+    statusBox.className = 'status-err';
+    return;
+  }
+
+  // UI
+  statusBox.textContent = '';
+  statusBox.className = '';
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Enviando…';
+
+  // 2.a) Intentar AJAX (si el mail YA está verificado)
+  let ajaxOk = false;
+  try {
+    const res = await fetch('https://formsubmit.co/ajax/codasoftwarecompany@gmail.com', {
+      method: 'POST',
+      body: data
+    });
+    const out = await res.json().catch(() => ({}));
+    if (res.ok && (out.success === true || out.success === 'true')) {
+      ajaxOk = true;
+    }
+  } catch (_) {
+    // ignoramos: probaremos fallback
+  }
+
+  if (ajaxOk) {
+    statusBox.textContent = '¡Gracias! Tu mensaje fue enviado correctamente.';
+    statusBox.className = 'status-ok';
+    form.reset();
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Enviar';
+    return;
+  }
+
+  // 2.b) Fallback automático a MAILTO (si AJAX no funcionó)
+  const subject = encodeURIComponent('Nuevo contacto desde CODA');
+  const body = encodeURIComponent(
+    `Nombre: ${nombre}\nEmail: ${email}\n\nMensaje:\n${mensaje}`
+  );
+  const mailtoUrl = `mailto:codasoftwarecompany@gmail.com?subject=${subject}&body=${body}`;
+
+  // Abrimos el cliente de correo del usuario
+  window.location.href = mailtoUrl;
+
+  // Damos feedback en la página igualmente
+  statusBox.textContent = 'No se pudo enviar automáticamente. Abrí tu correo para completar el envío.';
+  statusBox.className = 'status-err';
+
+  submitBtn.disabled = false;
+  submitBtn.textContent = 'Enviar';
+});
+</script>
 
 </body>
 </html>
