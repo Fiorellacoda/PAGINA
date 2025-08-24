@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>CODA - Inicio</title>
 <style>
 /* Reset */
@@ -20,7 +20,6 @@ header {
   padding: 12px 20px;
   position: relative;
 }
-
 .logo { font-size: 1.8rem; font-weight: bold; }
 
 /* Toggle */
@@ -28,20 +27,12 @@ header {
 .menu-toggle { display: none; font-size: 1.8rem; cursor: pointer; }
 
 /* Nav */
-nav {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
+nav { display: flex; align-items: center; gap: 20px; }
 nav a, summary.dropbtn {
-  color: white;
-  text-decoration: none;
-  padding: 10px;
-  cursor: pointer;
+  color: white; text-decoration: none; padding: 10px; cursor: pointer;
 }
 nav a:hover, details.dropdown:hover > summary.dropbtn {
-  background-color: #1b263b;
-  border-radius: 5px;
+  background-color: #1b263b; border-radius: 5px;
 }
 
 /* Dropdown */
@@ -49,44 +40,27 @@ details.dropdown { position: relative; }
 summary.dropbtn { list-style: none; cursor: pointer; }
 summary.dropbtn::-webkit-details-marker { display: none; }
 .dropdown-content {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  min-width: 200px;
-  background: white;
-  color: #0d1b2a;
-  display: none;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-  z-index: 999;
+  position: absolute; top: 100%; left: 0; min-width: 200px;
+  background: white; color: #0d1b2a; display: none;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 999;
 }
 details[open] > .dropdown-content { display: block; }
 .dropdown-content a {
-  color: #0d1b2a;
-  padding: 10px;
-  display: block;
-  text-decoration: none;
+  color: #0d1b2a; padding: 10px; display: block; text-decoration: none;
 }
 .dropdown-content a:hover { background-color: #e0e0e0; }
 
 /* Botón Contacto */
 .nav-contact {
-  background-color: #c9a646;
-  color: #0d1b2a;
-  padding: 10px 16px;
-  border-radius: 5px;
-  font-weight: bold;
-  text-decoration: none;
+  background-color: #c9a646; color: #0d1b2a;
+  padding: 10px 16px; border-radius: 5px; font-weight: bold; text-decoration: none;
 }
 .nav-contact:hover { background-color: #b38e3c; }
 
 /* ====== HERO ====== */
 .hero {
-  background-color: #0d1b2a;
-  color: white;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
+  background-color: #0d1b2a; color: white;
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
   padding: 60px 20px;
 }
 .hero-text { flex: 1; min-width: 280px; }
@@ -99,7 +73,7 @@ details[open] > .dropdown-content { display: block; }
 }
 .hero-text button:hover { background-color: #b38e3c; }
 
-/* ====== SERVICIOS ====== */
+/* ====== SECCIONES ====== */
 .section { padding: 60px 20px; text-align: center; }
 .section h2 { font-size: 2rem; margin-bottom: 40px; }
 .cards { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
@@ -118,11 +92,11 @@ details[open] > .dropdown-content { display: block; }
 }
 .card a:hover { background-color: #1b263b; }
 
-/* ====== COTIZACIÓN / CONTACTO ====== */
+/* ====== CONTACTO / COTIZACIÓN ====== */
 .cotizacion { background-color: #f4f4f4; padding: 60px 20px; }
 .cotizacion h2 { text-align: center; margin-bottom: 30px; font-size: 2rem; }
 .cotizacion form {
-  max-width: 450px; margin: auto; display: flex; flex-direction: column; gap: 12px;
+  max-width: 470px; margin: auto; display: flex; flex-direction: column; gap: 12px;
 }
 .cotizacion input, .cotizacion textarea, .cotizacion button {
   padding: 12px; font-size: 1rem; border-radius: 5px; border: 1px solid #ccc;
@@ -133,10 +107,8 @@ details[open] > .dropdown-content { display: block; }
 }
 .cotizacion button:hover { background-color: #1b263b; }
 
-/* Mensajes */
-#form-status { margin-top: 8px; text-align: left; font-size: 0.95rem; }
-.status-ok { color: #0a7d2e; }
-.status-err { color: #b00020; }
+/* Honeypot / Accesibilidad */
+.hp { position: absolute; left: -9999px; opacity: 0; }
 
 /* ====== FOOTER ====== */
 footer { background-color: #0d1b2a; color: white; text-align: center; padding: 20px; margin-top: 20px; }
@@ -144,42 +116,27 @@ footer { background-color: #0d1b2a; color: white; text-align: center; padding: 2
 /* ====== RESPONSIVE ====== */
 @media (max-width: 768px) {
   .menu-toggle { display: block; }
-
   nav {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    background-color: #0d1b2a;
-    z-index: 1000;
+    display: none; flex-direction: column; width: 100%;
+    position: absolute; top: 60px; left: 0; background-color: #0d1b2a; z-index: 1000;
   }
   .nav-toggle:checked ~ nav { display: flex; }
-
-  .dropdown-content {
-    position: relative;
-    width: 100%;
-    box-shadow: none;
-  }
+  .dropdown-content { position: relative; width: 100%; box-shadow: none; }
   details[open] > .dropdown-content { display: block; }
-
   nav a, summary.dropbtn, .nav-contact { padding: 14px 20px; width: 100%; text-align: left; margin-bottom: 5px; }
 }
-
-/* Honeypot / Accesibilidad */
-.hp { position: absolute; left: -9999px; opacity: 0; }
 </style>
 </head>
 <body>
 
 <header>
   <div class="logo">CODA</div>
-  <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-hidden="true">
+  <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-hidden="true" />
   <label for="nav-toggle" class="menu-toggle">&#9776;</label>
 
   <nav>
     <a href="index.html">Inicio</a>
+
     <details class="dropdown">
       <summary class="dropbtn">Servicios ▾</summary>
       <div class="dropdown-content">
@@ -188,6 +145,7 @@ footer { background-color: #0d1b2a; color: white; text-align: center; padding: 2
         <a href="dashboard.html">Dashboards Interactivos</a>
       </div>
     </details>
+
     <a href="https://wa.me/541157359777" target="_blank" class="nav-contact">Contacto</a>
   </nav>
 </header>
@@ -221,126 +179,37 @@ footer { background-color: #0d1b2a; color: white; text-align: center; padding: 2
   </div>
 </section>
 
-<!-- ====== FORMULARIO DE CONTACTO ====== -->
+<!-- ====== FORMULARIO DE CONTACTO (FormSubmit con invisible email) ====== -->
 <section class="cotizacion" id="cotizacion">
   <h2>Solicitar Cotización</h2>
 
-  <!-- 1) Acción HTML estándar (funciona aunque no haya JS) -->
-  <form id="cotizacionForm" action="https://formsubmit.co/codasoftwarecompany@gmail.com" method="POST">
-
+  <form action="https://formsubmit.co/800a035ac9358897ff248086500acdc6" method="POST">
     <!-- Honeypot antispam -->
     <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off">
 
-    <!-- Desactivar captcha de FormSubmit (opcional) -->
+    <!-- Opcionales -->
     <input type="hidden" name="_captcha" value="false">
-
-    <!-- Asunto del correo -->
     <input type="hidden" name="_subject" value="Nuevo contacto desde CODA">
-
-    <!-- Plantilla de email en tabla (opcional) -->
     <input type="hidden" name="_template" value="table">
-
-    <!-- (Opcional) Redirección tras enviar (sin JS) -->
-    <input type="hidden" name="_next" value="https://example.com/gracias.html">
+    <!-- Redirección tras enviar -->
+    <input type="hidden" name="_next" value="https://fiorellacoda.github.io/gracias.html">
 
     <!-- Campos -->
     <input type="text"   name="nombre"  placeholder="Tu nombre" required>
     <input type="email"  name="email"   placeholder="Tu correo" required>
     <textarea name="mensaje" placeholder="Describe tu proyecto" required></textarea>
 
-    <button type="submit" id="submitBtn">Enviar</button>
-    <div id="form-status" role="status" aria-live="polite"></div>
+    <button type="submit">Enviar</button>
   </form>
 
-  <!-- Contacto alternativo -->
-  <p style="margin-top:14px; font-size:0.95rem;">
-    ¿Preferís hablar por WhatsApp? <a href="https://wa.me/541157359777" target="_blank">Escribime acá</a>.
+  <p style="margin-top:12px;font-size:0.95rem;">
+    ¿Preferís WhatsApp? <a href="https://wa.me/541157359777" target="_blank">Escribime acá</a>.
   </p>
 </section>
 
 <footer>
-  <p>©️ 2025 CODA - Todos los derechos reservados</p>
+  <p>© 2025 CODA - Todos los derechos reservados</p>
 </footer>
-
-<script>
-/**
- * 2) INTENTO AJAX + FALLBACK AUTOMÁTICO A MAILTO
- * - Intenta enviar vía FormSubmit (endpoint AJAX).
- * - Si falla (token, CORS, etc.), abre el cliente de correo del usuario (mailto)
- *   con asunto y cuerpo prellenados para que igual te llegue el contacto.
- */
-const form = document.getElementById('cotizacionForm');
-const statusBox = document.getElementById('form-status');
-const submitBtn = document.getElementById('submitBtn');
-
-form.addEventListener('submit', async (e) => {
-  // Permitimos que, si no hay JS o algo falla muy temprano, el action HTML haga su trabajo.
-  e.preventDefault();
-
-  // Honeypot simple
-  const honey = form.querySelector('input[name="_honey"]');
-  if (honey && honey.value.trim() !== '') return;
-
-  const data = new FormData(form);
-  const nombre  = (data.get('nombre')  || '').toString().trim();
-  const email   = (data.get('email')   || '').toString().trim();
-  const mensaje = (data.get('mensaje') || '').toString().trim();
-
-  // Validación mínima
-  if (!nombre || !email || !mensaje) {
-    statusBox.textContent = 'Completá todos los campos.';
-    statusBox.className = 'status-err';
-    return;
-  }
-
-  // UI
-  statusBox.textContent = '';
-  statusBox.className = '';
-  submitBtn.disabled = true;
-  submitBtn.textContent = 'Enviando…';
-
-  // 2.a) Intentar AJAX (si el mail YA está verificado)
-  let ajaxOk = false;
-  try {
-    const res = await fetch('https://formsubmit.co/ajax/codasoftwarecompany@gmail.com', {
-      method: 'POST',
-      body: data
-    });
-    const out = await res.json().catch(() => ({}));
-    if (res.ok && (out.success === true || out.success === 'true')) {
-      ajaxOk = true;
-    }
-  } catch (_) {
-    // ignoramos: probaremos fallback
-  }
-
-  if (ajaxOk) {
-    statusBox.textContent = '¡Gracias! Tu mensaje fue enviado correctamente.';
-    statusBox.className = 'status-ok';
-    form.reset();
-    submitBtn.disabled = false;
-    submitBtn.textContent = 'Enviar';
-    return;
-  }
-
-  // 2.b) Fallback automático a MAILTO (si AJAX no funcionó)
-  const subject = encodeURIComponent('Nuevo contacto desde CODA');
-  const body = encodeURIComponent(
-    `Nombre: ${nombre}\nEmail: ${email}\n\nMensaje:\n${mensaje}`
-  );
-  const mailtoUrl = `mailto:codasoftwarecompany@gmail.com?subject=${subject}&body=${body}`;
-
-  // Abrimos el cliente de correo del usuario
-  window.location.href = mailtoUrl;
-
-  // Damos feedback en la página igualmente
-  statusBox.textContent = 'No se pudo enviar automáticamente. Abrí tu correo para completar el envío.';
-  statusBox.className = 'status-err';
-
-  submitBtn.disabled = false;
-  submitBtn.textContent = 'Enviar';
-});
-</script>
 
 </body>
 </html>
