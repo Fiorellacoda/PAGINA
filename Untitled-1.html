@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CODA - Coda Control Comercial (Sistema de Gestión Comercial)</title>
+<style>
+/* Reset */
+* {margin: 0; padding: 0; box-sizing: border-box;}
+body { font-family: Arial, sans-serif; line-height: 1.6; color: #0d1b2a; background:#fff;}
+
+/* HEADER */
+header { background-color: #0d1b2a; color: white; display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; position: relative; }
+.logo { font-size: 1.8rem; font-weight: bold; }
+nav { display: flex; align-items: center; gap: 20px; }
+nav a, .dropbtn { color: white; text-decoration: none; padding: 10px; cursor: pointer; }
+nav a:hover, .dropdown:hover .dropbtn { background-color: #1b263b; border-radius: 5px; }
+
+/* Dropdown */
+.dropdown { position: relative; }
+.dropdown-content { display: none; position: absolute; background-color: white; min-width: 220px; top: 100%; left: 0; box-shadow: 0px 8px 16px rgba(0,0,0,0.2); z-index: 999; }
+.dropdown-content a { color: #0d1b2a; padding: 10px; display: block; text-decoration: none; }
+.dropdown-content a:hover { background-color: #e0e0e0; }
+.dropdown:hover .dropdown-content { display: block; }
+
+/* Botón Contacto */
+.nav-contact { background-color: #c9a646; color: #0d1b2a; padding: 10px 16px; border-radius: 5px; font-weight: bold; text-decoration: none; }
+.nav-contact:hover { background-color: #b38e3c; }
+
+/* HERO */
+.hero { background-color: #0d1b2a; color: white; display: flex; flex-wrap: wrap; align-items: center; padding: 40px 20px; }
+.hero-text { flex: 1; min-width: 280px; }
+.hero-text h1 { font-size: 2rem; margin-bottom: 16px; }
+.hero-text p { font-size: 1rem; margin-bottom: 16px; opacity:.95; }
+.hero-badges { display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;}
+.badge { background:#1b263b; color:#fff; padding:6px 10px; border-radius:6px; font-size:.85rem; border:1px solid rgba(255,255,255,.15);}
+.hero-cta { margin-top: 16px; display:flex; gap:12px; flex-wrap:wrap; }
+.btn-whatsapp { background-color: #c9a646; color: #0d1b2a; padding: 10px 16px; border-radius: 6px; text-decoration: none; font-weight: bold; display:inline-block; }
+.btn-whatsapp:hover { background-color: #b38e3c; }
+.btn-outline { background:transparent; color:#fff; border:1px solid rgba(255,255,255,.5); padding:10px 16px; border-radius:6px; text-decoration:none; }
+.btn-outline:hover { background:rgba(255,255,255,.08); }
+
+/* SECCIONES GENERALES */
+.section { padding: 40px 20px; }
+.section h2 { text-align:center; font-size: 1.8rem; margin-bottom: 10px; }
+.section p.section-sub { text-align:center; color:#334; max-width:800px; margin: 0 auto 10px; }
+
+/* GRID CARDS */
+.grid { display:flex; flex-wrap:wrap; gap:20px; justify-content:center; }
+.card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); flex: 1 1 260px; max-width: 360px; }
+.card h3 { font-size: 1.15rem; margin-bottom: 10px; }
+.card ul { padding-left: 18px; }
+.card ul li { margin-bottom: 6px; color:#233; }
+.card .tag { display:inline-block; background:#f4f4f4; border:1px solid #eaeaea; padding:6px 10px; border-radius:8px; font-size:.85rem; margin-right:8px; margin-bottom:8px; }
+
+/* BLOQUE DESTACADO */
+.highlight { background:#f5f5f5; border:1px solid #eee; padding:16px; border-radius:12px; margin-top:12px; }
+
+/* PLANES */
+.pricing { padding: 40px 20px; background:#f7f7f7; }
+.pricing .cards { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 20px; }
+.pricing .card { max-width: 320px; display:flex; flex-direction:column; justify-content:space-between; }
+.price { display:block; font-weight:bold; color:#e76f51; margin:10px 0; font-size:1.1rem; }
+
+/* FOOTER */
+footer { background-color: #0d1b2a; color: white; text-align: center; padding: 15px; }
+
+/* RESPONSIVE */
+.menu-toggle { display: none; font-size: 1.8rem; cursor: pointer; }
+@media (max-width: 768px) {
+  nav { display: none; flex-direction: column; background-color: #0d1b2a; width: 100%; position: absolute; top: 60px; left: 0; }
+  nav.show { display: flex; }
+  .menu-toggle { display: block; }
+  .dropdown-content { position: static; background: #1b263b; box-shadow: none; }
+  .dropdown-content a { color: white; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">CODA</div>
+
+  <nav id="nav-links">
+    <a href="index.html">Inicio</a>
+
+    <div class="dropdown">
+      <span class="dropbtn" id="services-btn">Servicios ▾</span>
+      <div class="dropdown-content" id="services-menu">
+        <a href="creacion.html">Creación de Páginas Web</a>
+        <a href="automatizaciones.html">Automatizaciones</a>
+        <a href="dashboard.html">Dashboards Interactivos</a>
+        <a href="control-comercial.html">Sistema de Gestión Comercial</a>
+      </div>
+    </div>
+
+    <a href="https://wa.me/5491157359777" target="_blank" class="nav-contact">Contacto</a>
+  </nav>
+
+  <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <h1>Coda Control Comercial</h1>
+    <p>El <strong>Sistema de Gestión Comercial</strong> de CODA para <em>ventas, stock, caja y facturación AFIP</em> con integraciones a MercadoPago, delivery y e‑commerce, todo en un solo lugar.</p>
+    <div class="hero-badges">
+      <span class="badge">POS</span>
+      <span class="badge">Stock</span>
+      <span class="badge">AFIP</span>
+      <span class="badge">Cajas</span>
+      <span class="badge">Promos & Combos</span>
+      <span class="badge">Reportes</span>
+      <span class="badge">Integraciones</span>
+    </div>
+    <div class="hero-cta">
+      <a class="btn-whatsapp" href="https://wa.me/5491157359777?text=Hola,%20quiero%20una%20demo%20de%20Coda%20Control%20Comercial" target="_blank">💬 Solicitar demo</a>
+      <a class="btn-outline" href="#planes">Ver planes</a>
+    </div>
+  </div>
+</section>
+
+<!-- MÓDULOS PRINCIPALES -->
+<section class="section">
+  <h2>Todo lo que necesitás, integrado</h2>
+  <p class="section-sub">Armado centralizado de combos y descuentos, venta simultánea, búsqueda ágil con código de barras, AFIP electrónica, cajas, compras, inventarios y estadísticas.</p>
+  <div class="grid">
+
+    <!-- Ventas -->
+    <div class="card">
+      <h3>Ventas (POS)</h3>
+      <ul>
+        <li>Combos, descuentos y promociones (2x1, 2da al 70%).</li>
+        <li>Venta en simultáneo, múltiples clientes a la vez.</li>
+        <li>Búsqueda por código, descripción, categorías y código de barras.</li>
+        <li>Accesos rápidos a productos/categorías.</li>
+        <li>Listas de precios por cliente o condición.</li>
+        <li>Actualización de precios por costos, márgenes o masiva.</li>
+        <li>Historial de precios.</li>
+      </ul>
+    </div>
+
+    <!-- Productos -->
+    <div class="card">
+      <h3>Productos</h3>
+      <ul>
+        <li>Venta por código de barras.</li>
+        <li>Disponibilidad por sucursal, fecha y horario.</li>
+        <li>Armado y costeo de compuestos (recetas, cajas).</li>
+        <li>Precio por Kg/unidad y agrupamientos para estadísticas.</li>
+        <li>Impresión de etiquetas con datos configurables y código.</li>
+      </ul>
+    </div>
+
+    <!-- Facturación -->
+    <div class="card">
+      <h3>Facturación (AFIP)</h3>
+      <ul>
+        <li>Múltiples puntos de facturación.</li>
+        <li>Factura electrónica AFIP en el momento (sin impresora fiscal).</li>
+        <li>Modo offline si se cae internet.</li>
+        <li>Alícuotas de IVA, Facturas A y remitos X.</li>
+        <li>Integración con impresoras fiscales ya instaladas.</li>
+      </ul>
+    </div>
+
+    <!-- Cajas -->
+    <div class="card">
+      <h3>Gestión de Cajas</h3>
+      <ul>
+        <li>Estado de cajas en tiempo real y rendiciones.</li>
+        <li>Varios medios de cobro y análisis por medio.</li>
+        <li>Registro de gastos y pagos a proveedores.</li>
+        <li>Arqueos de efectivo, tarjetas y pagos electrónicos.</li>
+        <li>Transferencias de saldos entre cajas.</li>
+      </ul>
+    </div>
+
+    <!-- Compras -->
+    <div class="card">
+      <h3>Compras</h3>
+      <ul>
+        <li>Registro de compras e impuestos; control de aumentos.</li>
+        <li>Subdiario y Libro IVA compras digital.</li>
+        <li>Órdenes de compra y seguimiento de pendientes.</li>
+        <li>Recepción de mercadería al stock.</li>
+      </ul>
+    </div>
+
+    <!-- Stock -->
+    <div class="card">
+      <h3>Stock</h3>
+      <ul>
+        <li>Stock por producto e ingredientes (recetas).</li>
+        <li>Puntos de reposición y sugerencia de recompra.</li>
+        <li>Múltiples unidades de medida y decimales.</li>
+        <li>Inventarios y diferencias; lectura con códigos de barras.</li>
+        <li>Registro de desperdicios, degustaciones y devoluciones.</li>
+      </ul>
+    </div>
+
+    <!-- Estadísticas -->
+    <div class="card">
+      <h3>Estadísticas y Auditoría</h3>
+      <ul>
+        <li>Panel de ventas por día/sector/vendedor/banda horaria.</li>
+        <li>Ticket promedio, ítems por ticket y cubierto promedio.</li>
+        <li>Top de artículos, combos y descuentos otorgados.</li>
+        <li>Control de movimientos de caja y diferencias.</li>
+        <li>Auditoría: anulaciones y modificaciones por usuario/horario.</li>
+      </ul>
+    </div>
+
+    <!-- Seguridad y RRHH -->
+    <div class="card">
+      <h3>Seguridad y RRHH</h3>
+      <ul>
+        <li>Perfiles y niveles de autorización por usuario.</li>
+        <li>Registro de actividad (log completo).</li>
+        <li>Fichadas por huella o código; horas extra, llegadas tarde, ausentes.</li>
+      </ul>
+    </div>
+
+    <!-- Integraciones -->
+    <div class="card">
+      <h3>Integraciones</h3>
+      <div class="highlight">
+        <span class="tag">MercadoPago (QR)</span>
+        <span class="tag">PedidosYa</span>
+        <span class="tag">Rappi</span>
+        <span class="tag">MásDelivery</span>
+        <span class="tag">WooCommerce</span>
+        <span class="tag">TiendaNube</span>
+      </div>
+      <p style="margin-top:10px;">Sumamos integraciones a medida según tu flujo.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- CASOS DE USO / RUBROS -->
+<section class="section" style="background:#f5f5f5;">
+  <h2>Hecho para tu rubro</h2>
+  <p class="section-sub">Restaurantes y cafeterías, retail de indumentaria, y servicios locales. Configuramos procesos por rubro para que todo sea más rápido.</p>
+  <div class="grid">
+    <div class="card">
+      <h3>Restaurantes y cafés</h3>
+      <p>Comandas por sector, barra/cocina, combos y control de cubierto. Delivery integrado.</p>
+    </div>
+    <div class="card">
+      <h3>Retail e indumentaria</h3>
+      <p>Variantes (talle/color), etiquetas con código y listas por cliente. Stock claro.</p>
+    </div>
+    <div class="card">
+      <h3>Servicios y comercios locales</h3>
+      <p>Turnos, facturación, caja y gastos. Todo en una sola plataforma.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PLANES -->
+<section id="planes" class="pricing">
+  <h2>Planes y precios</h2>
+  <p class="section-sub">Incluyen capacitación inicial y acompañamiento durante el despliegue.</p>
+  <div class="cards">
+
+    <div class="card">
+      <div>
+        <h3>Starter</h3>
+        <span class="price">Desde USD 170</span>
+        <ul>
+          <li>POS + Ventas</li>
+          <li>Gestión de productos y stock</li>
+          <li>Factura electrónica AFIP</li>
+          <li>Reportes esenciales</li>
+        </ul>
+      </div>
+      <a class="btn-whatsapp" href="https://wa.me/5491157359777?text=Hola,%20quiero%20el%20plan%20Starter%20de%20Coda%20Control%20Comercial" target="_blank">💬 Consultar por WhatsApp</a>
+    </div>
+
+    <div class="card">
+      <div>
+        <h3>Pro</h3>
+        <span class="price">Desde USD 270</span>
+        <ul>
+          <li>Todo Starter</li>
+          <li>Promos y combos avanzados</li>
+          <li>Automatizaciones y notificaciones</li>
+          <li>Reportes avanzados + auditoría</li>
+        </ul>
+      </div>
+      <a class="btn-whatsapp" href="https://wa.me/5491157359777?text=Hola,%20quiero%20el%20plan%20Pro%20de%20Coda%20Control%20Comercial" target="_blank">💬 Consultar por WhatsApp</a>
+    </div>
+
+    <div class="card">
+      <div>
+        <h3>Full IT</h3>
+        <span class="price">A medida</span>
+        <ul>
+          <li>Todo Pro</li>
+          <li>Integraciones (MP, Delivery, E‑commerce)</li>
+          <li>Roles/Permisos + RRHH</li>
+          <li>Implementación y soporte prioritario</li>
+        </ul>
+      </div>
+      <a class="btn-whatsapp" href="https://wa.me/5491157359777?text=Hola,%20quiero%20el%20plan%20Full%20IT%20de%20Coda%20Control%20Comercial" target="_blank">💬 Consultar por WhatsApp</a>
+   
